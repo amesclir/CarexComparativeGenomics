@@ -112,32 +112,6 @@ Opening some Carex data
 
 ```{r}
 
-carexlittledale <- read.csv("carexlittledalei.csv")
-
-carexlittledale
-
-chr.exclude <- NULL
-cyto.info <- carexlittledale
-tracks.inside <- 0
-tracks.outside <- 0
-RCircos.Set.Core.Components(cyto.info, chr.exclude,tracks.inside, tracks.outside)
-
-
-rcircos.params <- RCircos.Get.Plot.Parameters()
-rcircos.cyto <- RCircos.Get.Plot.Ideogram()
-rcircos.position <- RCircos.Get.Plot.Positions()
-RCircos.List.Plot.Parameters()
-
-rcircos.params <- RCircos.Get.Plot.Parameters()
-rcircos.params$base.per.unit <- 3000
-RCircos.Reset.Plot.Parameters(rcircos.params)
-RCircos.List.Plot.Parameters()
-
-RCircos.Set.Plot.Area()
-
-RCircos.Chromosome.Ideogram.Plot()
-
-
 both <- read.csv("both.csv")
 
 both
@@ -178,6 +152,13 @@ readsdata2 <- readsdata[readsdata[,1]%in%both[,4],]
 
 write.csv(readsdata2, file = "reads.csv")
 
+
+
+```
+
+
+Making the comparative genomics analyses
+```{r}
 
 bowtie2 <- read.csv("bowtie2.csv", sep = "")
 bowtie2
@@ -400,6 +381,19 @@ RCircos.Chromosome.Ideogram.Plot()
 RCircos.Link.Plot(links[links[,4]=="LG30",], track.num, TRUE)
 dev.off()
 
+out.file <- "ComparativeGenomicsLG31.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(links[links[,4]=="LG31",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG32.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(links[links[,4]=="LG32",], track.num, TRUE)
+dev.off()
 
 ```
 
