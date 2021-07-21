@@ -698,3 +698,539 @@ RCircos.Link.Plot(links, track.num = 1)
 
 
 ```
+
+
+Now, let's check the result with the reads that align only once
+
+```{r}
+
+library(RCircos)
+both <- read.csv("both.csv")
+
+RCircos.Get.Plot.Colors(both, col_vector)
+
+both$PlotColor <- col_vector
+
+chr.exclude <- NULL
+cyto.info <- both
+tracks.inside <- 0
+tracks.outside <- 0
+RCircos.Set.Core.Components(cyto.info, chr.exclude,tracks.inside, tracks.outside)
+
+
+rcircos.params <- RCircos.Get.Plot.Parameters()
+rcircos.params
+rcircos.cyto <- RCircos.Get.Plot.Ideogram()
+rcircos.cyto
+rcircos.position <- RCircos.Get.Plot.Positions()
+rcircos.position
+RCircos.List.Plot.Parameters()
+
+#rcircos.params <- RCircos.Get.Plot.Parameters()
+#rcircos.params$base.per.unit <- 3000
+#RCircos.Reset.Plot.Parameters(rcircos.params)
+#RCircos.List.Plot.Parameters()
+
+
+rcircos.cyto
+rcircos.cyto$BandColor <- rcircos.cyto$PlotColor
+rcircos.cyto$ChrColor <-  rcircos.cyto$PlotColor
+RCircos.Reset.Plot.Ideogram(rcircos.cyto)
+RCircos.List.Plot.Parameters()
+
+
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+
+
+bowtie2dup <- read.csv("bowtie2dup.csv", sep = "")
+bowtie2dup
+dim(bowtie2dup)
+duplicatedreads <- bowtie2dup$Marker[duplicated(bowtie2dup$Marker)]
+noduplicatedreads <- setdiff(bowtie2dup$Marker,duplicatedreads)
+noduplicatedreads
+
+bowtie2nodup <-  bowtie2dup[bowtie2dup$Marker %in% noduplicatedreads,]
+bowtie2nodup
+
+
+both
+
+linksnodup <- merge(bowtie2nodup, both, by.x = "Marker", by.y = "Band", sort = F)
+linksnodup <- linksnodup[,c(2,3,4,5,6,7)]
+linksnodup
+
+RCircos.Link.Plot(linksnodup, track.num, TRUE)
+
+
+
+
+
+
+linksnodup$PlotColor <- 1
+linksnodup[linksnodup[,1]=="chr1", "PlotColor"] <- col_vector[1]
+linksnodup[linksnodup[,1]=="chr2", "PlotColor"] <- col_vector[2]
+linksnodup[linksnodup[,1]=="chr3", "PlotColor"] <- col_vector[3]
+linksnodup[linksnodup[,1]=="chr4", "PlotColor"] <- col_vector[4]
+linksnodup[linksnodup[,1]=="chr5", "PlotColor"] <- col_vector[5]
+linksnodup[linksnodup[,1]=="chr6", "PlotColor"] <- col_vector[6]
+linksnodup[linksnodup[,1]=="chr7", "PlotColor"] <- col_vector[7]
+linksnodup[linksnodup[,1]=="chr8", "PlotColor"] <- col_vector[8]
+linksnodup[linksnodup[,1]=="chr9", "PlotColor"] <- col_vector[9]
+linksnodup[linksnodup[,1]=="chr10", "PlotColor"] <- col_vector[10]
+linksnodup[linksnodup[,1]=="chr11", "PlotColor"] <- col_vector[11]
+linksnodup[linksnodup[,1]=="chr12", "PlotColor"] <- col_vector[12]
+linksnodup[linksnodup[,1]=="chr13", "PlotColor"] <- col_vector[13]
+linksnodup[linksnodup[,1]=="chr14", "PlotColor"] <- col_vector[14]
+linksnodup[linksnodup[,1]=="chr15", "PlotColor"] <- col_vector[15]
+linksnodup[linksnodup[,1]=="chr16", "PlotColor"] <- col_vector[16]
+linksnodup[linksnodup[,1]=="chr17", "PlotColor"] <- col_vector[17]
+linksnodup[linksnodup[,1]=="chr18", "PlotColor"] <- col_vector[18]
+linksnodup[linksnodup[,1]=="chr19", "PlotColor"] <- col_vector[19]
+linksnodup[linksnodup[,1]=="chr20", "PlotColor"] <- col_vector[20]
+linksnodup[linksnodup[,1]=="chr21", "PlotColor"] <- col_vector[21]
+linksnodup[linksnodup[,1]=="chr22", "PlotColor"] <- col_vector[22]
+linksnodup[linksnodup[,1]=="chr23", "PlotColor"] <- col_vector[23]
+linksnodup[linksnodup[,1]=="chr24", "PlotColor"] <- col_vector[24]
+linksnodup[linksnodup[,1]=="chr25", "PlotColor"] <- col_vector[25]
+linksnodup[linksnodup[,1]=="chr26", "PlotColor"] <- col_vector[26]
+linksnodup[linksnodup[,1]=="chr27", "PlotColor"] <- col_vector[27]
+linksnodup[linksnodup[,1]=="chr28", "PlotColor"] <- col_vector[28]
+linksnodup[linksnodup[,1]=="chr29", "PlotColor"] <- col_vector[29]
+
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup, track.num = 1)
+
+out.file <- "ComparativeGenomicsLG1nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG1",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG2nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG2",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG3nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG3",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG4nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG4",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG5nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG5",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG6nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG6",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG7nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG7",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG8nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG8",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG9nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG9",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG10nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG10",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG11nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG11",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG12nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG12",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG13nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG13",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG14nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG14",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG15nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG15",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG16nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG16",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG17nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG17",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG18nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG18",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG19nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG19",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG20nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG20",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG21nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG21",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG22nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG22",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG23nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG23",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG24nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG24",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG25nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG25",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG26nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG26",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG27nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG27",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG28nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG28",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG29nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG29",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG30nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG30",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG31nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG31",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicsLG32nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,4]=="LG32",], track.num, TRUE)
+dev.off()
+
+
+
+
+out.file <- "ComparativeGenomicschr1nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr1",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr2nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr2",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr3nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr3",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr4nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr4",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr5nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr5",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr6nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr6",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr7nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr7",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr8nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr8",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr9nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr9",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr10nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr10",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr11nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr11",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr12nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr12",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr13nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr13",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr14nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr14",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr15nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr15",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr16nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr16",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr17nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr17",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr18nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr18",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr19nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr19",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr20nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr20",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr21nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr21",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr22nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr22",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr23nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr23",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr24nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr24",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr25nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr25",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr26nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr26",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr27nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr27",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr28nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr28",], track.num, TRUE)
+dev.off()
+
+out.file <- "ComparativeGenomicschr29nodup.pdf"
+pdf(file=out.file, height=8, width=8, compress=TRUE)
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+RCircos.Link.Plot(linksnodup[linksnodup[,1]=="chr29",], track.num, TRUE)
+dev.off()
+
+
+```
