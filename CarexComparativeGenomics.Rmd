@@ -1234,3 +1234,89 @@ dev.off()
 
 
 ```
+
+
+Defining blocks!
+
+```{r}
+
+chr1 <- linksnodup[linksnodup$Chromosome.x=="chr1",]
+chr1 <- chr1[order(chr1$chromStart),]
+chr1
+#chr1blocks <- chr1[c(2,4,6),c(1,2,4)] 
+
+chr23 <- linksnodup[linksnodup$Chromosome.x=="chr23",]
+chr23 <- chr23[order(chr23$chromStart),]
+chr23
+
+chr24 <- linksnodup[linksnodup$Chromosome.x=="chr24",]
+chr24 <- chr24[order(chr24$chromStart),]
+chr24
+chr24blocks <- chr24[c(1,8),c(1,2,3,4)] 
+chr24blocks
+chr24blocks[1,3] <- chr24[8,2]-1
+chr24blocks[2,3] <- chr24[18,2]
+chr24blocks[1,4] <- "unsorted"
+chr24blocks[2,4] <- "conserved"
+chr24blocks
+
+chr25 <- linksnodup[linksnodup$Chromosome.x=="chr25",]
+chr25 <- chr25[order(chr25$chromStart),]
+chr25
+chr25blocks <- chr25[c(1,3,7,9),c(1,2,3,4)] 
+chr25blocks[1,3] <- chr25[2,3]
+chr25blocks[2,3] <- chr25[6,3]
+chr25blocks[3,2] <- chr25[6,3] + 1
+chr25blocks[3,3] <- chr25[9,2] - 1
+chr25blocks[3,4] <- "fisfus"
+chr25blocks[4,3] <- chr25[15,3]
+newrow <- c("chr25", 325961, 1321736, "fisfus")
+#insertRow <- function(existingDF, newrow, r) {
+#  existingDF[seq(r+1,nrow(existingDF)+1),] <- existingDF[seq(r,nrow(existingDF)),]
+#  existingDF[r,] <- newrow
+#  existingDF
+#}
+chr25blocks <- insertRow(chr25blocks, newrow, 2)
+chr25blocks[1,4] <- "maybeconserved"
+chr25blocks[3,4] <- "conserved"
+chr25blocks[5,4] <- "conserved"
+chr25blocks
+#2 conserved block and 3rd possible, and two rearrangementes between then
+
+chr26 <- linksnodup[linksnodup$Chromosome.x=="chr26",]
+chr26 <- chr26[order(chr26$chromStart),]
+chr26
+chr26blocks <- chr26[c(1,5),c(1,2,3,4)] 
+chr26blocks[1,3] <- chr26[4,2]
+chr26blocks[2,2] <- chr26[4,2] + 1
+chr26blocks[2,3] <- chr26[8,2]
+chr26blocks[2,4] <- "complex"
+chr26blocks[1,4] <- "conserved"
+chr26blocks
+#single conserved block and area with possible multiple rearrangements
+
+chr27 <- linksnodup[linksnodup$Chromosome.x=="chr27",]
+chr27 <- chr27[order(chr27$chromStart),]
+chr27
+chr27blocks <- chr27[c(1,4),c(1,2,3,4)] 
+chr27blocks[1,3] <- chr27[3,2]
+chr27blocks[1,4] <- "conserved"
+chr27blocks[2,3] <- chr27[6,2]
+chr27blocks[2,4] <- "conserved"
+chr27blocks <- rbind(chr27blocks[1,],c("chr27", 3696901,4879022,"fisfus"),chr27blocks[2,])
+chr27blocks
+#two conserved blocks detected, 1 rearrangement between both
+
+chr28 <- linksnodup[linksnodup$Chromosome.x=="chr28",]
+chr28 <- chr28[order(chr28$chromStart),]
+chr28
+#single block
+
+chr29 <- linksnodup[linksnodup$Chromosome.x=="chr29",]
+chr29 <- chr29[order(chr29$chromStart),]
+chr29
+#single block
+
+
+```
+
