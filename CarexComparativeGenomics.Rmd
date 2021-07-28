@@ -1242,7 +1242,9 @@ And compare with BRC
 ```{r}
 
 BCR <- read.csv("BCR.csv")
-
+#Somewhat similar sequences (blastn), default
+BCR2 <- read.csv("BCR2.csv")
+#Somewhat similar sequences (blastn), Word size 7, Match/Mitmatch Score 4,-5, 
 
 
 chr1 <- linksnodup[linksnodup$Chromosome.x=="chr1",]
@@ -1258,7 +1260,7 @@ newrow <- c("chr1", 5952569, 8518522, "fisfus")
 chr1blocks <- insertRow(chr1blocks, newrow, 3)
 newrow <- c("chr1", 13077361, 16671836, "fisfus")
 chr1blocks <- insertRow(chr1blocks, newrow, 5)
-chr1blocks[1,4]<- "fisfus"
+chr1blocks[1,4]<- "maybefisfus"
 chr1blocks[2,4]<- "conserved"
 chr1blocks[4,4]<- "conserved"
 chr1blocks[6,4]<- "conserved"
@@ -1266,7 +1268,7 @@ chr1blocks
 
 BCR[BCR$Chromosome=="chr1",]
 colnames(chr1blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr1blocks$PatternCode <- c(1,0,1,0,1,0) 
+chr1blocks$PatternCode <- c(0.5,0,1,0,1,0) 
 chr1blocks$CBR <- c(1,0,1,0,2,1)
 chr1blocks
 
@@ -1281,16 +1283,16 @@ chr2blocks[3,3] <- chr2[13,2]
 chr2blocks[4,2] <- chr2[13,2]+1
 chr2blocks[4,3] <- chr2[16,2]
 chr2blocks[1,4] <- "conserved"
-chr2blocks[2,4] <- "fisfus"
+chr2blocks[2,4] <- "maybefisfus"
 chr2blocks[3,4] <- "conserved"
-chr2blocks[4,4] <- "complex"
+chr2blocks[4,4] <- "unsortedx1&fisfus"
 chr2blocks
 
 BCR[BCR$Chromosome=="chr2",]
 colnames(chr2blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr2blocks$PatternCode <- c(0,1,0,1)
-#There is change in order in the complex pattern, but we are not going to consider it
+chr2blocks$PatternCode <- c(0,0.5,0,1.5)
 chr2blocks$CBR <- c(0,2,1,0)
+#there is one BCR just before the first conserved area
 chr2blocks
 
 chr3 <- linksnodup[linksnodup$Chromosome.x=="chr3",]
@@ -1317,6 +1319,7 @@ BCR[BCR$Chromosome=="chr3",]
 colnames(chr3blocks)<- c("Chromosome", "Start", "End", "Pattern")
 chr3blocks$PatternCode <- c(1,0,1,0,1,0) 
 chr3blocks$CBR <- c(0,0,1,0,1,0)
+#there is one BCR just before the first fisfus, single repeat using BCR2 setting but we are not considering it
 chr3blocks
 
 chr4 <- linksnodup[linksnodup$Chromosome.x=="chr4",]
@@ -1333,17 +1336,17 @@ chr4blocks[6,2] <- chr4[16,2]+1
 chr4blocks[6,3] <- chr4[18,2]-1
 newrow <- c("chr4", 12453692, 13155061, "fisfus")
 chr4blocks <- insertRow(chr4blocks, newrow, 5)
-chr4blocks[1,4] <- "complex"
+chr4blocks[1,4] <- "maybefisfusx2"
 chr4blocks[2,4] <- "conserved"
-chr4blocks[3,4] <- "fisfus"
+chr4blocks[3,4] <- "maybefisfus"
 chr4blocks[4,4] <- "conserved"
 chr4blocks[6,4] <- "conserved"
-chr4blocks[7,4] <- "complex"
+chr4blocks[7,4] <- "unsorted&maybefisfus"
 chr4blocks
 
 BCR[BCR$Chromosome=="chr4",]
 colnames(chr4blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr4blocks$PatternCode <- c(2,0,1,0,1,0,2) 
+chr4blocks$PatternCode <- c(1,0,0.5,0,1,0,1) 
 chr4blocks$CBR <- c(1,0,0,1,0,0,1)
 chr4blocks
 
@@ -1359,17 +1362,16 @@ chr5blocks[3,3] <- chr5[9,2]
 chr5blocks[4,2] <- chr5[9,2]+1
 chr5blocks[4,3] <- chr5[10,2]
 chr5blocks[1,4] <- "conserved"
-chr5blocks[2,4] <- "complex"
+chr5blocks[2,4] <- "unsorted&fisfus"
 chr5blocks[3,4] <- "conserved"
 chr5blocks[4,4] <- "unsorted"
 chr5blocks
 
 BCR[BCR$Chromosome=="chr5",]
 colnames(chr5blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr5blocks$PatternCode <- c(0,2,0,0) 
-#There is change in order in the complex pattern, but we are not going to consider it
-chr5blocks$CBR <- c(0,2,0,0)
-#there are two CBR areas but both are in the fisfus of the patterns and not in the change order
+chr5blocks$PatternCode <- c(0,1.5,0,0.5) 
+chr5blocks$CBR <- c(0,3,0,0)
+#there are three CBR areas but both are in the fisfus of the patterns and not in the change order
 chr5blocks
 
 
@@ -1382,15 +1384,15 @@ chr6blocks[2,2] <- chr6[3,2]+1
 chr6blocks[2,3] <- chr6[7,2]-1
 chr6blocks[3,3] <- chr6[11,2]
 chr6blocks[1,4] <- "conserved"
-chr6blocks[2,4] <- "fisfus"
+chr6blocks[2,4] <- "fisfusx3"
 chr6blocks[3,4] <- "conserved"
 chr6blocks
 
-BCR[BCR$Chromosome=="chr6",]
-#There are not BCR this chr
+BCR2[BCR2$Chromosome=="chr6",]
+#There are not BCR this chr, but there is one when relaxing parameters
 colnames(chr6blocks)<- c("Chromosome", "Start", "End", "Pattern")
 chr6blocks$PatternCode <- c(0,3,0) 
-chr6blocks$CBR <- c(0,0,0)
+chr6blocks$CBR <- c(0,1,0)
 chr6blocks
 
 
@@ -1403,7 +1405,7 @@ chr7blocks[2,3] <- chr7[10,2]
 chr7blocks[3,3] <- chr7[13,2]
 newrow <- c("chr7", 9609375, 10386170, "fisfus")
 chr7blocks <- insertRow(chr7blocks, newrow, 3)
-chr7blocks[1,4] <- "complex"
+chr7blocks[1,4] <- "unsortedx2&fisfus"
 chr7blocks[2,4] <- "conserved"
 chr7blocks[4,4] <- "conserved"
 chr7blocks
@@ -1429,16 +1431,18 @@ chr8blocks[4,2] <- chr8[9,2]+1
 chr8blocks[4,3] <- chr8[11,2]-1
 chr8blocks[5,3] <- chr8[17,2]
 chr8blocks[1,4] <- "conserved"
-chr8blocks[2,4] <- "fisfus"
+chr8blocks[2,4] <- "fisfusx2"
 chr8blocks[3,4] <- "maybeconserved"
-chr8blocks[4,4] <- "fisfus"
+chr8blocks[4,4] <- "maybefisfus"
 chr8blocks[5,4] <- "conserved"
 chr8blocks
 
 BCR[BCR$Chromosome=="chr8",]
 colnames(chr8blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr8blocks$PatternCode <- c(0,2,0,1,0) 
+chr8blocks$PatternCode <- c(0,2,0,0.5,0) 
 chr8blocks$CBR <- c(0,1,0,1,0)
+#there are 1 BCR before the 1st conserved area, and one after the last conserved area
+#the 1 BCR in the maybefisfus is just one single
 chr8blocks
 
 chr9 <- linksnodup[linksnodup$Chromosome.x=="chr9",]
@@ -1451,18 +1455,19 @@ chr9blocks[2,3] <- chr9[5,2]
 chr9blocks[3,3] <- chr9[11,2]
 newrow <- c("chr9", 5660034, 12014988, "fisfus")
 chr9blocks <- insertRow(chr9blocks, newrow, 3)
-chr9blocks[1,4] <- "fisfus"
+chr9blocks[1,4] <- "maybefisfus"
 chr9blocks[2,4] <- "conserved"
 chr9blocks[4,4] <- "conserved"
 chr9blocks
 
 BCR[BCR$Chromosome=="chr9",]
+BCR2[BCR2$Chromosome=="chr9",]
 #There are not BCR this chr
 colnames(chr9blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr9blocks$PatternCode <- c(1,0,1,0) 
+chr9blocks$PatternCode <- c(0.5,0,1,0) 
 chr9blocks$CBR <- c(0,0,0,0)
 chr9blocks
-
+#We are missing something
 
 chr10 <- linksnodup[linksnodup$Chromosome.x=="chr10",]
 chr10 <- chr10[order(chr10$chromStart),]
@@ -1481,16 +1486,17 @@ newrow <- c("chr10", 4244125, 5269404, "fisfus")
 chr10blocks <- insertRow(chr10blocks, newrow, 2)
 chr10blocks[1,4] <- "conserved"
 chr10blocks[3,4] <- "conserved"
-chr10blocks[4,4] <- "fisfus"
+chr10blocks[4,4] <- "maybefisfus"
 chr10blocks[5,4] <- "conserved"
-chr10blocks[6,4] <- "fisfus"
+chr10blocks[6,4] <- "maybefisfus"
 chr10blocks[7,4] <- "conserved"
 chr10blocks
 
 BCR[BCR$Chromosome=="chr10",]
+BCR2[BCR2$Chromosome=="chr10",]
 #There are not BCR this chr
 colnames(chr10blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr10blocks$PatternCode <- c(0,1,0,1,0,1,0) 
+chr10blocks$PatternCode <- c(0,1,0,0.5,0,0.5,0) 
 chr10blocks$CBR <- c(0,0,0,0,0,0,0)
 chr10blocks
 
@@ -1507,11 +1513,11 @@ chr11blocks[4,3] <- chr11[10,2]
 chr11blocks[5,3] <- chr11[23,2]
 newrow <- c("chr11", 2606506, 3836219, "fisfus")
 chr11blocks <- insertRow(chr11blocks, newrow, 3)
-newrow <- c("chr11", 5751244, 6162157, "fisfus")
+newrow <- c("chr11", 5751244, 6162157, "maybefisfus")
 chr11blocks <- insertRow(chr11blocks, newrow, 5)
-newrow <- c("chr11", 7481618, 10687339, "fisfus")
+newrow <- c("chr11", 7481618, 10687339, "maybefisfus")
 chr11blocks <- insertRow(chr11blocks, newrow, 7)
-chr11blocks[1,4] <- "fisfus"
+chr11blocks[1,4] <- "maybefisfus"
 chr11blocks[2,4] <- "conserved"
 chr11blocks[4,4] <- "conserved"
 chr11blocks[6,4] <- "maybeconserved"
@@ -1520,8 +1526,8 @@ chr11blocks
 
 BCR[BCR$Chromosome=="chr11",]
 colnames(chr11blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr11blocks$PatternCode <- c(1,0,1,0,1,0,1,0) 
-chr11blocks$CBR <- c(0,0,0,0,0,0,0,1)
+chr11blocks$PatternCode <- c(0.5,0,1,0,0.5,0,0.5,0) 
+chr11blocks$CBR <- c(1,1,0,0,0,0,0,0)
 #the first BCR is in the area of some small unsorting that we have not considered
 #There are two BCR, but the second one in after and out of the known conserved
 chr11blocks
@@ -1541,12 +1547,12 @@ chr12blocks[5,3] <- chr12[20,2]
 chr12blocks[6,3] <- chr12[23,2]
 newrow <- c("chr12", 6078481, 7374679, "fisfus")
 chr12blocks <- insertRow(chr12blocks, newrow, 4)
-newrow <- c("chr12", 9012769, 10409253, "fisfus")
+newrow <- c("chr12", 9012769, 10409253, "maybefisfus")
 chr12blocks <- insertRow(chr12blocks, newrow, 6)
-newrow <- c("chr12", 10917073, 11405499, "fisfus")
+newrow <- c("chr12", 10917073, 11405499, "maybefisfus")
 chr12blocks <- insertRow(chr12blocks, newrow, 8)
 chr12blocks[1,4] <- "maybeconserved"
-chr12blocks[2,4] <- "complex"
+chr12blocks[2,4] <- "maybefisfusx2"
 chr12blocks[3,4] <- "conserved"
 chr12blocks[5,4] <- "conserved"
 chr12blocks[7,4] <- "maybeconserved"
@@ -1554,12 +1560,13 @@ chr12blocks[9,4] <- "conserved"
 chr12blocks
 
 BCR[BCR$Chromosome=="chr12",]
+BCR2[BCR2$Chromosome=="chr12",]
 colnames(chr12blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr12blocks$PatternCode <- c(0,2,0,1,0,1,0,1,0) 
+chr12blocks$PatternCode <- c(0,1,0,1,0,0.5,0,0.5,0) 
 chr12blocks$CBR <- c(0,0,0,0,0,0,0,0,0)
-#the first BCR in after and out of the known conserved
+#the first BCR in after and out of the known conserved, the same with BCR2 settings
 chr12blocks
-
+#We are missing something
 
 chr13 <- linksnodup[linksnodup$Chromosome.x=="chr13",]
 chr13 <- chr13[order(chr13$chromStart),]
@@ -1572,16 +1579,15 @@ chr13blocks[4,2] <- chr13[18,2]+1
 chr13blocks[4,3] <- chr13[21,2]
 newrow <- c("chr13", 9428904, 10457675, "fisfus")
 chr13blocks <- insertRow(chr13blocks, newrow, 3)
-chr13blocks[1,4] <- "complex"
+chr13blocks[1,4] <- "unsortedx3&mayfisfus"
 chr13blocks[2,4] <- "conserved"
 chr13blocks[4,4] <- "conserved"
-chr13blocks[5,4] <- "complex"
+chr13blocks[5,4] <- "fisfus&unsorted"
 chr13blocks
 
 BCR[BCR$Chromosome=="chr13",]
 colnames(chr13blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr13blocks$PatternCode <- c(3,0,1,0,2)
-#the second complex is considered by 1 because the unsorting is smalll
+chr13blocks$PatternCode <- c(2.5,0,1,0,1.5)
 chr13blocks$CBR <- c(1,0,0,0,0)
 chr13blocks
 
@@ -1601,17 +1607,18 @@ newrow <- c("chr14", 5018142, 5279697, "fisfus")
 chr14blocks <- insertRow(chr14blocks, newrow, 3)
 newrow <- c("chr14", 8444297, 10345369, "fisfus")
 chr14blocks  <- insertRow(chr14blocks, newrow, 5)
-chr14blocks[1,4] <- "fisfus"
+chr14blocks[1,4] <- "maybefisfusx2"
 chr14blocks[2,4] <- "conserved"
 chr14blocks[4,4] <- "conserved"
 chr14blocks[6,4] <- "conserved"
-chr14blocks[7,4] <- "complex"
+chr14blocks[7,4] <- "maybefisfusx2&unsorted"
 chr14blocks
 
 BCR[BCR$Chromosome=="chr14",]
 colnames(chr14blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr14blocks$PatternCode <- c(2,0,1,0,1,0,2)
+chr14blocks$PatternCode <- c(1,0,1,0,1,0,1.5)
 chr14blocks$CBR <- c(1,0,0,1,1,0,0)
+#the BCR is before the first maybefisfusx2
 chr14blocks
 
 chr15 <- linksnodup[linksnodup$Chromosome.x=="chr15",]
@@ -1630,15 +1637,16 @@ newrow <- c("chr15", 4376634, 8917572, "fisfus")
 chr15blocks <- insertRow(chr15blocks, newrow, 2)
 chr15blocks[1,4] <- "conserved"
 chr15blocks[3,4] <- "conserved"
-chr15blocks[4,4] <- "fisfus"
+chr15blocks[4,4] <- "maybefisfus"
 chr15blocks[5,4] <- "conserved"
-chr15blocks[6,4] <- "fisfus"
+chr15blocks[6,4] <- "maybefisfus"
 chr15blocks
 
 #There are not BCR this chr
 BCR[BCR$Chromosome=="chr15",]
+BCR2[BCR2$Chromosome=="chr15",]
 colnames(chr15blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr15blocks$PatternCode <- c(0,1,0,1,0,1)
+chr15blocks$PatternCode <- c(0,1,0,0.5,0,0.5)
 chr15blocks$CBR <- c(0,0,0,0,0,0)
 chr15blocks
 
@@ -1655,14 +1663,14 @@ chr16blocks[3,3] <- chr16[12,2]
 chr16blocks[4,2] <- chr16[12,2]+1
 chr16blocks[4,3] <- chr16[14,2]
 chr16blocks[1,4] <- "conserved"
-chr16blocks[2,4] <- "fisfus"
+chr16blocks[2,4] <- "maybefisfus"
 chr16blocks[3,4] <- "conserved"
-chr16blocks[4,4] <- "fisfus"
+chr16blocks[4,4] <- "maybefisfusx2"
 chr16blocks
 
 BCR[BCR$Chromosome=="chr16",]
 colnames(chr16blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr16blocks$PatternCode <- c(0,1,0,2)
+chr16blocks$PatternCode <- c(0,0.5,0,1)
 chr16blocks$CBR <- c(0,1,1,1)
 chr16blocks
 
@@ -1678,18 +1686,19 @@ chr17blocks[3,3]<-chr17[11,2]-1
 chr17blocks[4,3]<-chr17[12,2]
 chr17blocks[5,2]<-chr17[12,2]+1
 chr17blocks[5,3]<-chr17[14,2]
-chr17blocks[1,4]<-"complex"
+chr17blocks[1,4]<-"maybefisfus&unsortedx2"
 chr17blocks[2,4]<-"conserved"
-chr17blocks[3,4]<-"complex"
+chr17blocks[3,4]<-"unsorted&fisfus&unsorted"
 chr17blocks[4,4]<-"maybeconserved"
-chr17blocks[5,4]<-"fisfus"
+chr17blocks[5,4]<-"fisfusx1.5"
 chr17blocks
 #the maybeconserved could be problably gone
 
 BCR[BCR$Chromosome=="chr17",]
 colnames(chr17blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr17blocks$PatternCode <- c(2,0,2,0,2)
+chr17blocks$PatternCode <- c(1.5,0,2,0,1.5)
 chr17blocks$CBR <- c(0,0,0,0,2)
+#The second BCR is after the whole thing
 chr17blocks
 
 
@@ -1708,18 +1717,18 @@ chr18blocks[6,3] <- chr18[20,2]
 newrow <- c("chr18", 6038837, 6531250, "fisfus")
 chr18blocks <- insertRow(chr18blocks, newrow, 6)
 chr18blocks[1,4] <- "maybeconserved"
-chr18blocks[2,4] <- "complex"
+chr18blocks[2,4] <- "maybefisfus&unsorted"
 chr18blocks[3,4] <- "conserved"
-chr18blocks[4,4] <- "complex"
+chr18blocks[4,4] <- "unsorted&maybefisfus"
 chr18blocks[5,4] <- "conserved"
 chr18blocks[7,4] <- "conserved"
 chr18blocks
 
 BCR[BCR$Chromosome=="chr18",]
 colnames(chr18blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr18blocks$PatternCode <- c(NA,2,0,2,0,1,0)
-chr18blocks$CBR <- c(NA,1,0,0,0,0,1)
-#We are not consider the maybe conserved as there is a CBR close 
+chr18blocks$PatternCode <- c(0,1,0,1,0,1,0)
+chr18blocks$CBR <- c(0,0,0,0,0,0,1)
+#There is one BCR before everything
 chr18blocks
 
 chr19 <- linksnodup[linksnodup$Chromosome.x=="chr19",]
@@ -1734,15 +1743,16 @@ chr19blocks[4,3] <- chr19[15,2]
 newrow <- c("chr19", 7006970, 8323676, "fisfus")
 chr19blocks <- insertRow(chr19blocks, newrow, 4)
 chr19blocks[1,4] <- "conserved"
-chr19blocks[2,4] <- "complex"
+chr19blocks[2,4] <- "maybefisfus&unsortedx2"
 chr19blocks[3,4] <- "conserved"
 chr19blocks[5,4] <- "conserved"
 chr19blocks
 
 #There are not BCR this chr
 BCR[BCR$Chromosome=="chr19",]
+BCR2[BCR2$Chromosome=="chr19",]
 colnames(chr19blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr19blocks$PatternCode <- c(0,2,0,1,0)
+chr19blocks$PatternCode <- c(0,1.5,0,1,0)
 chr19blocks$CBR <- c(0,0,0,0,0)
 chr19blocks
 
@@ -1751,13 +1761,14 @@ chr20 <- chr20[order(chr20$chromStart),]
 chr20
 chr20blocks <- chr20[c(1),c(1,2,3,4)] 
 chr20blocks[1,3] <- chr20[5,2]
-chr20blocks[1,4] <- "complex"
+chr20blocks[1,4] <- "unsorted&maybefisfus"
 chr20blocks
 
 #There are not BCR this chr
 BCR[BCR$Chromosome=="chr20",]
+BCR2[BCR2$Chromosome=="chr20",]
 colnames(chr20blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr20blocks$PatternCode <- c(2)
+chr20blocks$PatternCode <- c(1)
 chr20blocks$CBR <- c(0)
 chr20blocks
 
@@ -1768,19 +1779,19 @@ chr21blocks <- chr21[c(1,3,5),c(1,2,3,4)]
 chr21blocks[1,3] <- chr21[3,2]-1 
 chr21blocks[2,3] <- chr21[4,2]
 chr21blocks[3,3] <- chr21[6,2]
-newrow <- c("chr21", 5440874, 6958720, "fisfus")
+newrow <- c("chr21", 5440874, 6958720, "maybefisfus")
 chr21blocks <- insertRow(chr21blocks, newrow, 3)
-chr21blocks[1,4] <- "fisfus"
+chr21blocks[1,4] <- "maybefisfusx2"
 chr21blocks[2,4] <- "maybeconserved"
 chr21blocks[4,4] <- "maybeconserved"
 chr21blocks
 
 #There are not BCR this chr
 BCR[BCR$Chromosome=="chr21",]
+BCR2[BCR2$Chromosome=="chr21",]
 colnames(chr21blocks)<- c("Chromosome", "Start", "End", "Pattern")
-#We are not going to consider the maybeconserved ones and fusion the fisfus
-chr21blocks$PatternCode <- c(3, NA, NA, NA)
-chr21blocks$CBR <- c(0,NA,NA,NA)
+chr21blocks$PatternCode <- c(1, 0, 0.5, 0)
+chr21blocks$CBR <- c(0,0,0,0)
 chr21blocks
 
 
@@ -1795,16 +1806,16 @@ chr22blocks[3,3] <- chr22[10,2] - 1
 chr22blocks[4,3] <- chr22[12,2]
 chr22blocks[5,2] <- chr22[12,2] + 1
 chr22blocks[5,3] <- chr22[17,2]
-chr22blocks[1,4] <- "complex"
+chr22blocks[1,4] <- "unsorted&maybefisfus"
 chr22blocks[2,4] <- "conserved"
-chr22blocks[3,4] <- "complex"
+chr22blocks[3,4] <- "unsorted&fisfus"
 chr22blocks[4,4] <- "conserved"
-chr22blocks[5,4] <- "complex"
+chr22blocks[5,4] <- "fisfusx1.5&unsorted"
 chr22blocks
 
 BCR[BCR$Chromosome=="chr22",]
 colnames(chr22blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr22blocks$PatternCode <- c(2, 0, 2, 0,2)
+chr22blocks$PatternCode <- c(1, 0, 1.5, 0,2)
 chr22blocks$CBR <- c(0,0,0,0,1)
 chr22blocks
 
@@ -1820,17 +1831,18 @@ chr23blocks[4,2] <- chr23[15,2]+1
 chr23blocks[4,3] <- chr23[19,2]
 newrow <- c("chr23", 5567451, 5942385, "fisfus")
 chr23blocks <- insertRow(chr23blocks, newrow, 3)
-chr23blocks[1,4] <- "complex"
+chr23blocks[1,4] <- "unsortedx2&fisfus"
 chr23blocks[2,4] <- "conserved"
 chr23blocks[4,4] <- "conserved"
-chr23blocks[5,4] <- "complex"
+chr23blocks[5,4] <- "unsorted&maybefisfus"
 chr23blocks
 
 #There are not BCR this chr
 BCR[BCR$Chromosome=="chr23",]
+BCR2[BCR2$Chromosome=="chr23",]
 colnames(chr23blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr23blocks$PatternCode <- c(2, 0, 1, 0,2)
-chr23blocks$CBR <- c(0,0,0,0,0)
+chr23blocks$PatternCode <- c(2, 0, 1, 0,1)
+chr23blocks$CBR <- c(0,0,0,1,0)
 chr23blocks
 
 
@@ -1841,14 +1853,15 @@ chr24blocks <- chr24[c(1,8),c(1,2,3,4)]
 chr24blocks
 chr24blocks[1,3] <- chr24[8,2]-1
 chr24blocks[2,3] <- chr24[18,2]
-chr24blocks[1,4] <- "unsorted"
+chr24blocks[1,4] <- "unsortedx2&fisfus"
 chr24blocks[2,4] <- "conserved"
 chr24blocks
 
 BCR[BCR$Chromosome=="chr24",]
 colnames(chr24blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr24blocks$PatternCode <- c(1, 0)
+chr24blocks$PatternCode <- c(2, 0)
 chr24blocks$CBR <- c(1,0)
+#There are only 2 single repeat at the beginning, before everything
 chr24blocks
 
 chr25 <- linksnodup[linksnodup$Chromosome.x=="chr25",]
@@ -1859,7 +1872,6 @@ chr25blocks[1,3] <- chr25[2,3]
 chr25blocks[2,3] <- chr25[6,3]
 chr25blocks[3,2] <- chr25[6,3] + 1
 chr25blocks[3,3] <- chr25[9,2] - 1
-chr25blocks[3,4] <- "fisfus"
 chr25blocks[4,3] <- chr25[15,3]
 newrow <- c("chr25", 325961, 1321736, "fisfus")
 #insertRow <- function(existingDF, newrow, r) {
@@ -1870,6 +1882,7 @@ newrow <- c("chr25", 325961, 1321736, "fisfus")
 chr25blocks <- insertRow(chr25blocks, newrow, 2)
 chr25blocks[1,4] <- "maybeconserved"
 chr25blocks[3,4] <- "conserved"
+chr25blocks[4,4] <- "maybefisfus&fisfus"
 chr25blocks[5,4] <- "conserved"
 chr25blocks
 #2 conserved block and 3rd possible, and two rearrangementes between then
@@ -1877,7 +1890,7 @@ chr25blocks
 #There are not BCR this chr
 BCR[BCR$Chromosome=="chr25",]
 colnames(chr25blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr25blocks$PatternCode <- c(NA, 1, 0, 2,0)
+chr25blocks$PatternCode <- c(0, 1, 0, 1.5,0)
 #we are going to remove the maybeconserved
 chr25blocks$CBR <- c(0,0,0,0,0)
 chr25blocks
@@ -1890,7 +1903,7 @@ chr26blocks <- chr26[c(1,5),c(1,2,3,4)]
 chr26blocks[1,3] <- chr26[4,2]
 chr26blocks[2,2] <- chr26[4,2] + 1
 chr26blocks[2,3] <- chr26[8,2]
-chr26blocks[2,4] <- "complex"
+chr26blocks[2,4] <- "fisfus&maybefisfusx2"
 chr26blocks[1,4] <- "conserved"
 chr26blocks
 #single conserved block and area with possible multiple rearrangements
@@ -1898,7 +1911,7 @@ chr26blocks
 #There are not BCR this chr
 BCR[BCR$Chromosome=="chr26",]
 colnames(chr26blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr26blocks$PatternCode <- c(0, 4)
+chr26blocks$PatternCode <- c(0, 2)
 chr26blocks$CBR <- c(0,0)
 chr26blocks
 
@@ -1938,8 +1951,7 @@ chr28blocks
 #There are not BCR this chr
 BCR[BCR$Chromosome=="chr28",]
 colnames(chr28blocks)<- c("Chromosome", "Start", "End", "Pattern")
-chr28blocks$PatternCode <- c(0, NA)
-#we are not going to consider the unsorting
+chr28blocks$PatternCode <- c(0, 0.5)
 chr28blocks$CBR <- c(0,0)
 chr28blocks
 
