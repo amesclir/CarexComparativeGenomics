@@ -2925,22 +2925,33 @@ if (as.numeric(x[i,2]) > y[j,1] &  as.numeric(x[i,2]) < y[j,2])
 GCtemp <- c(as.numeric(x[i,2]), y[j,2], y[j,2] - as.numeric(x[i,2]), y[j,4])
 }
 
+if (GCtemp[2] < x[i,3]) { 
+
+  
   for(j in 1:dim(y)[1]) {
 if (GCtemp[1] < y[j,1] & as.numeric(x[i,3]) > y[j,2])
   
 GCtemp2 <- rbind(GCtemp, y[j,])
 
-}
-
- for(j in 1:dim(y)[1]) {  
+  } 
+  
+for(j in 1:dim(y)[1]) {  
 if (as.numeric(x[i,3]) > y[j,1] & as.numeric(x[i,3]) < y[j,2])
 newrow <- c(y[j,1], as.numeric(x[i,3]), as.numeric(x[i,3]) - y[j,1], y[j,4])
-GCtemp2 <- rbind(GCtemp2, newrow)
+GCtemp3 <- rbind(GCtemp2, newrow)
+
+}  
+  
+  }
+else
+{
+GCtemp3 <- GCtemp
+GCtemp3<-matrix(GCtemp3,ncol=4)
 }
 
+  
+out[i,6] <-   sum(as.numeric(GCtemp3[,3]) * as.numeric(GCtemp3[,4])) / sum(as.numeric(GCtemp3[,3]))
 
-  for (k in 1:dim(GCtemp2)[1])
-out[i,6] <-   (sum(GCtemp2[k,3] * GCtemp2[k,4]) / (sum(GCtemp2[k,3])))
 }
 
 out
@@ -2949,15 +2960,135 @@ out
 
 y<-chr2GC
 x<-genomeblocksBCR3_2d
+i <- 3
 genomeblocksGC(x,y)
 
 chr1GC <- read.csv("./GCcontent/chr1GCcontent.csv")
-genomeblocksCR3_1dGC <- genomeblocksGC(genomeblocksBCR3_1d,chr1GC)
-genomeblocksCR3_1dGC
+genomeblocksBCR3_1dGC <- genomeblocksGC(genomeblocksBCR3_1d,chr1GC)
+genomeblocksBCR3_1dGC
 
-chr2GC <- read.csv("./GCcontent/chr1GCcontent.csv")
-genomeblocksCR3_2dGC <- genomeblocksGC(genomeblocksBCR3_2d,chr2GC)
-genomeblocksCR3_2dGC
+chr2GC <- read.csv("./GCcontent/chr2GCcontent.csv")
+genomeblocksBCR3_2dGC <- genomeblocksGC(genomeblocksBCR3_2d,chr2GC)
+genomeblocksBCR3_2dGC
+
+chr3GC <- read.csv("./GCcontent/chr3GCcontent.csv")
+genomeblocksBCR3_3dGC <- genomeblocksGC(genomeblocksBCR3_3d,chr3GC)
+genomeblocksBCR3_3dGC
+
+chr4GC <- read.csv("./GCcontent/chr4GCcontent.csv")
+genomeblocksBCR3_4dGC <- genomeblocksGC(genomeblocksBCR3_4d,chr4GC)
+genomeblocksBCR3_4dGC
+
+chr5GC <- read.csv("./GCcontent/chr5GCcontent.csv")
+genomeblocksBCR3_5dGC <- genomeblocksGC(genomeblocksBCR3_5d,chr5GC)
+genomeblocksBCR3_5dGC
+
+chr6GC <- read.csv("./GCcontent/chr6GCcontent.csv")
+genomeblocksBCR3_6dGC <- genomeblocksGC(genomeblocksBCR3_6d,chr6GC)
+genomeblocksBCR3_6dGC
+
+chr7GC <- read.csv("./GCcontent/chr7GCcontent.csv")
+genomeblocksBCR3_7dGC <- genomeblocksGC(genomeblocksBCR3_7d,chr7GC)
+genomeblocksBCR3_7dGC
+
+chr8GC <- read.csv("./GCcontent/chr8GCcontent.csv")
+genomeblocksBCR3_8dGC <- genomeblocksGC(genomeblocksBCR3_8d,chr8GC)
+genomeblocksBCR3_8dGC
+
+chr9GC <- read.csv("./GCcontent/chr9GCcontent.csv")
+genomeblocksBCR3_9dGC <- genomeblocksGC(genomeblocksBCR3_9d,chr9GC)
+genomeblocksBCR3_9dGC
+
+chr10GC <- read.csv("./GCcontent/chr10GCcontent.csv")
+genomeblocksBCR3_10dGC <- genomeblocksGC(genomeblocksBCR3_10d,chr10GC)
+genomeblocksBCR3_10dGC
+
+chr11GC <- read.csv("./GCcontent/chr11GCcontent.csv")
+genomeblocksBCR3_11dGC <- genomeblocksGC(genomeblocksBCR3_11d,chr11GC)
+genomeblocksBCR3_11dGC
+
+chr12GC <- read.csv("./GCcontent/chr12GCcontent.csv")
+genomeblocksBCR3_12dGC <- genomeblocksGC(genomeblocksBCR3_12d,chr12GC)
+genomeblocksBCR3_12dGC
+
+chr13GC <- read.csv("./GCcontent/chr13GCcontent.csv")
+genomeblocksBCR3_13dGC <- genomeblocksGC(genomeblocksBCR3_13d,chr13GC)
+genomeblocksBCR3_13dGC
+
+chr14GC <- read.csv("./GCcontent/chr14GCcontent.csv")
+genomeblocksBCR3_14dGC <- genomeblocksGC(genomeblocksBCR3_14d,chr14GC)
+genomeblocksBCR3_14dGC
+
+chr15GC <- read.csv("./GCcontent/chr15GCcontent.csv")
+genomeblocksBCR3_15dGC <- genomeblocksGC(genomeblocksBCR3_15d,chr15GC)
+genomeblocksBCR3_15dGC
+
+chr16GC <- read.csv("./GCcontent/chr16GCcontent.csv")
+genomeblocksBCR3_16dGC <- genomeblocksGC(genomeblocksBCR3_16d,chr16GC)
+genomeblocksBCR3_16dGC
+
+chr17GC <- read.csv("./GCcontent/chr17GCcontent.csv")
+genomeblocksBCR3_17dGC <- genomeblocksGC(genomeblocksBCR3_17d,chr17GC)
+genomeblocksBCR3_17dGC
+
+chr18GC <- read.csv("./GCcontent/chr18GCcontent.csv")
+genomeblocksBCR3_18dGC <- genomeblocksGC(genomeblocksBCR3_18d,chr18GC)
+genomeblocksBCR3_18dGC
+
+chr19GC <- read.csv("./GCcontent/chr19GCcontent.csv")
+genomeblocksBCR3_19dGC <- genomeblocksGC(genomeblocksBCR3_19d,chr19GC)
+genomeblocksBCR3_19dGC
+
+chr20GC <- read.csv("./GCcontent/chr20GCcontent.csv")
+genomeblocksBCR3_20dGC <- genomeblocksGC(genomeblocksBCR3_20d,chr20GC)
+genomeblocksBCR3_20dGC
+
+chr21GC <- read.csv("./GCcontent/chr21GCcontent.csv")
+genomeblocksBCR3_21dGC <- genomeblocksGC(genomeblocksBCR3_21d,chr21GC)
+genomeblocksBCR3_21dGC
+
+chr22GC <- read.csv("./GCcontent/chr22GCcontent.csv")
+genomeblocksBCR3_22dGC <- genomeblocksGC(genomeblocksBCR3_22d,chr22GC)
+genomeblocksBCR3_22dGC
+
+chr23GC <- read.csv("./GCcontent/chr23GCcontent.csv")
+genomeblocksBCR3_23dGC <- genomeblocksGC(genomeblocksBCR3_23d,chr23GC)
+genomeblocksBCR3_23dGC
+
+chr24GC <- read.csv("./GCcontent/chr24GCcontent.csv")
+genomeblocksBCR3_24dGC <- genomeblocksGC(genomeblocksBCR3_24d,chr24GC)
+genomeblocksBCR3_24dGC
+
+chr25GC <- read.csv("./GCcontent/chr25GCcontent.csv")
+genomeblocksBCR3_25dGC <- genomeblocksGC(genomeblocksBCR3_25d,chr25GC)
+genomeblocksBCR3_25dGC
+
+chr26GC <- read.csv("./GCcontent/chr26GCcontent.csv")
+genomeblocksBCR3_26dGC <- genomeblocksGC(genomeblocksBCR3_26d,chr26GC)
+genomeblocksBCR3_26dGC
+
+chr27GC <- read.csv("./GCcontent/chr27GCcontent.csv")
+genomeblocksBCR3_27dGC <- genomeblocksGC(genomeblocksBCR3_27d,chr27GC)
+genomeblocksBCR3_27dGC
+
+chr28GC <- read.csv("./GCcontent/chr28GCcontent.csv")
+genomeblocksBCR3_28dGC <- genomeblocksGC(genomeblocksBCR3_28d,chr28GC)
+genomeblocksBCR3_28dGC
+
+chr29GC <- read.csv("./GCcontent/chr29GCcontent.csv")
+genomeblocksBCR3_29dGC <- genomeblocksGC(genomeblocksBCR3_29d,chr29GC)
+genomeblocksBCR3_29dGC
+
+
+genomeblocksBCR3_alldGC <- rbind(genomeblocksBCR3_1dGC,genomeblocksBCR3_2dGC,genomeblocksBCR3_3dGC,genomeblocksBCR3_4dGC,genomeblocksBCR3_5dGC,genomeblocksBCR3_6dGC,genomeblocksBCR3_7dGC,genomeblocksBCR3_8dGC,genomeblocksBCR3_9dGC,genomeblocksBCR3_10dGC,genomeblocksBCR3_11dGC,genomeblocksBCR3_12dGC,genomeblocksBCR3_13dGC,genomeblocksBCR3_14dGC,genomeblocksBCR3_15dGC,genomeblocksBCR3_16dGC,genomeblocksBCR3_17dGC,genomeblocksBCR3_18dGC,genomeblocksBCR3_19dGC,genomeblocksBCR3_20dGC,genomeblocksBCR3_21dGC,genomeblocksBCR3_22dGC,genomeblocksBCR3_23dGC,genomeblocksBCR3_24dGC,genomeblocksBCR3_25dGC,genomeblocksBCR3_26dGC,genomeblocksBCR3_27dGC,genomeblocksBCR3_28dGC,genomeblocksBCR3_29dGC)
+
+genomeblocksBCR3_alld
+boxplot(as.numeric(genomeblocksBCR3_alldGC[,"GC"]) ~ genomeblocksBCR3_alldGC[,"type"])
+
+anova(lm(as.numeric(genomeblocksBCR3_alldGC[,"GC"]) ~ as.character(genomeblocksBCR3_alldGC[,"type"])))
+summary(aov(as.numeric(genomeblocksBCR3_alldGC[,"GC"]) ~ as.character(genomeblocksBCR3_alldGC[,"type"])))
+
+summary(lm(as.numeric(genomeblocksBCR3_alldGC[,"GC"]) ~ as.numeric(genomeblocksBCR3_alldGC[,"BCR"])))
 
 ```
 
