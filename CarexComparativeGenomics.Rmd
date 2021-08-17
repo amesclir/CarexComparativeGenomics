@@ -2656,3 +2656,308 @@ anova(lm(as.numeric(genomeblocksBCR4_all[,"BCR"]) ~ as.character(genomeblocksBCR
 summary(aov(as.numeric(genomeblocksBCR4_all[,"BCR"]) ~ as.character(genomeblocksBCR4_all[,"type"])))
 ```
 
+
+We are going to use the hits that have duplicates
+
+```{r}
+
+chr1d <- links[links$Chromosome.x=="chr1",]
+chr1d <- chr1[order(chr1$chromStart),]
+chr1d
+
+chr2d <- links[links$Chromosome.x=="chr2",]
+chr2d <- chr2[order(chr2$chromStart),]
+chr2d
+
+chr3d <- links[links$Chromosome.x=="chr3",]
+chr3d <- chr3[order(chr3$chromStart),]
+chr3d
+
+chr4d <- links[links$Chromosome.x=="chr4",]
+chr4d <- chr4[order(chr4$chromStart),]
+chr4d
+
+chr5d <- links[links$Chromosome.x=="chr5",]
+chr5d <- chr5[order(chr5$chromStart),]
+chr5d
+
+chr6d <- links[links$Chromosome.x=="chr6",]
+chr6d <- chr6[order(chr6$chromStart),]
+chr6d
+
+chr7d <- links[links$Chromosome.x=="chr7",]
+chr7d <- chr7[order(chr7$chromStart),]
+chr7d
+
+chr8d <- links[links$Chromosome.x=="chr8",]
+chr8d <- chr8[order(chr8$chromStart),]
+chr8d
+
+chr9d <- links[links$Chromosome.x=="chr9",]
+chr9d <- chr9[order(chr9$chromStart),]
+chr9d
+
+chr10d <- links[links$Chromosome.x=="chr10",]
+chr10d <- chr10[order(chr10$chromStart),]
+chr10d
+
+chr11d <- links[links$Chromosome.x=="chr11",]
+chr11d <- chr11[order(chr11$chromStart),]
+chr11d
+
+chr12d <- links[links$Chromosome.x=="chr12",]
+chr12d <- chr12[order(chr12$chromStart),]
+chr12d
+
+chr13d <- links[links$Chromosome.x=="chr13",]
+chr13d <- chr13[order(chr13$chromStart),]
+chr13d
+
+chr14d <- links[links$Chromosome.x=="chr14",]
+chr14d <- chr14[order(chr14$chromStart),]
+chr14d
+
+chr15d <- links[links$Chromosome.x=="chr15",]
+chr15d <- chr15[order(chr15$chromStart),]
+chr15d
+
+chr16d <- links[links$Chromosome.x=="chr16",]
+chr16d <- chr16[order(chr16$chromStart),]
+chr16d
+
+chr17d <- links[links$Chromosome.x=="chr17",]
+chr17d <- chr17[order(chr17$chromStart),]
+chr17d
+
+chr18d <- links[links$Chromosome.x=="chr18",]
+chr18d <- chr18[order(chr18$chromStart),]
+chr18d
+
+chr19d <- links[links$Chromosome.x=="chr19",]
+chr19d <- chr19[order(chr19$chromStart),]
+chr19d
+
+chr20d <- links[links$Chromosome.x=="chr20",]
+chr20d <- chr20[order(chr20$chromStart),]
+chr20d
+
+chr21d <- links[links$Chromosome.x=="chr21",]
+chr21d <- chr21[order(chr21$chromStart),]
+chr21d
+
+chr22d <- links[links$Chromosome.x=="chr22",]
+chr22d <- chr22[order(chr22$chromStart),]
+chr22d
+
+chr23d <- links[links$Chromosome.x=="chr23",]
+chr23d <- chr23[order(chr23$chromStart),]
+chr23d
+
+chr24d <- links[links$Chromosome.x=="chr24",]
+chr24d <- chr24[order(chr24$chromStart),]
+chr24d
+
+chr25d <- links[links$Chromosome.x=="chr25",]
+chr25d <- chr25[order(chr25$chromStart),]
+chr25d
+
+chr26d <- links[links$Chromosome.x=="chr26",]
+chr26d <- chr26[order(chr26$chromStart),]
+chr26d
+
+chr27d <- links[links$Chromosome.x=="chr27",]
+chr27d <- chr27[order(chr27$chromStart),]
+chr27d
+
+chr28d <- links[links$Chromosome.x=="chr28",]
+chr28d <- chr28[order(chr28$chromStart),]
+chr28d
+
+chr29d <- links[links$Chromosome.x=="chr29",]
+chr29d <- chr29[order(chr29$chromStart),]
+chr29d
+
+outblock1d <- genomeblocks(chr1d)
+outblock1d
+outblock2d <- genomeblocks(chr2d)
+outblock2d
+outblock3d <- genomeblocks(chr3d)
+outblock3d
+outblock4d <- genomeblocks(chr4d)
+outblock4d
+outblock5d <- genomeblocks(chr5d)
+outblock5d
+outblock6d <- genomeblocks(chr6d)
+outblock6d
+outblock7d <- genomeblocks(chr7d)
+outblock7d
+outblock8d <- genomeblocks(chr8d)
+outblock8d
+outblock9d <- genomeblocks(chr9d)
+outblock9d
+outblock10d <- genomeblocks(chr10d)
+outblock10d
+outblock11d <- genomeblocks(chr11d)
+outblock11d
+outblock12d <- genomeblocks(chr12d)
+outblock12d
+outblock13d <- genomeblocks(chr13d)
+outblock13d
+outblock14d <- genomeblocks(chr14d)
+outblock14d
+outblock15d <- genomeblocks(chr15d)
+outblock15d
+outblock16d <- genomeblocks(chr16d)
+outblock16d
+outblock17d <- genomeblocks(chr17d)
+outblock17d
+outblock18d <- genomeblocks(chr18d)
+outblock18d
+outblock19d <- genomeblocks(chr19d)
+outblock19d
+outblock20d <- genomeblocks(chr20d)
+outblock20d
+outblock21d <- genomeblocks(chr21d)
+outblock21d
+outblock22d <- genomeblocks(chr22d)
+outblock22d
+outblock23d <- genomeblocks(chr23d)
+outblock23d
+outblock24d <- genomeblocks(chr24d)
+outblock24d
+outblock25d <- genomeblocks(chr25d)
+outblock25d
+outblock26d <- genomeblocks(chr26d)
+outblock26d
+outblock27d <- genomeblocks(chr27d)
+outblock27d
+outblock28d <- genomeblocks(chr28d)
+outblock28d
+outblock29d <- genomeblocks(chr29d)
+outblock29d
+
+
+#Using Andre BCR and somewhat similar search
+genomeblocksBCR3_1d <- genomeblocksBCR(outblock1d, BCR3_1)
+genomeblocksBCR3_1d
+genomeblocksBCR3_2d <- genomeblocksBCR(outblock2d, BCR3_2)
+genomeblocksBCR3_2d
+genomeblocksBCR3_3d <- genomeblocksBCR(outblock3d, BCR3_3)
+genomeblocksBCR3_3d
+genomeblocksBCR3_4d <- genomeblocksBCR(outblock4d, BCR3_4)
+genomeblocksBCR3_4d
+genomeblocksBCR3_5d <- genomeblocksBCR(outblock5d, BCR3_5)
+genomeblocksBCR3_5d
+genomeblocksBCR3_6d <- genomeblocksBCR(outblock6d, BCR3_6)
+genomeblocksBCR3_6d
+genomeblocksBCR3_7d <- genomeblocksBCR(outblock7d, BCR3_7)
+genomeblocksBCR3_7d
+genomeblocksBCR3_8d <- genomeblocksBCR(outblock8d, BCR3_8)
+genomeblocksBCR3_8d
+genomeblocksBCR3_9d <- genomeblocksBCR(outblock9d, BCR3_9)
+genomeblocksBCR3_9d
+genomeblocksBCR3_10d <- genomeblocksBCR(outblock10d, BCR3_10)
+genomeblocksBCR3_10d
+genomeblocksBCR3_11d <- genomeblocksBCR(outblock11d, BCR3_11)
+genomeblocksBCR3_11d
+genomeblocksBCR3_12d <- genomeblocksBCR(outblock12d, BCR3_12)
+genomeblocksBCR3_12d
+genomeblocksBCR3_13d <- genomeblocksBCR(outblock13d, BCR3_13)
+genomeblocksBCR3_13d
+genomeblocksBCR3_14d <- genomeblocksBCR(outblock14d, BCR3_14)
+genomeblocksBCR3_14d
+genomeblocksBCR3_15d <- genomeblocksBCR(outblock15d, BCR3_15)
+genomeblocksBCR3_15d
+genomeblocksBCR3_16d <- genomeblocksBCR(outblock16d, BCR3_16)
+genomeblocksBCR3_16d
+genomeblocksBCR3_17d <- genomeblocksBCR(outblock17d, BCR3_17)
+genomeblocksBCR3_17d
+genomeblocksBCR3_18d <- genomeblocksBCR(outblock18d, BCR3_18)
+genomeblocksBCR3_18d
+genomeblocksBCR3_19d <- genomeblocksBCR(outblock19d, BCR3_19)
+genomeblocksBCR3_19d
+genomeblocksBCR3_20d <- genomeblocksBCR(outblock20d, BCR3_20)
+genomeblocksBCR3_20d
+genomeblocksBCR3_21d <- genomeblocksBCR(outblock21d, BCR3_21)
+genomeblocksBCR3_21d
+genomeblocksBCR3_22d <- genomeblocksBCR(outblock22d, BCR3_22)
+genomeblocksBCR3_22d
+genomeblocksBCR3_23d <- genomeblocksBCR(outblock23d, BCR3_23)
+genomeblocksBCR3_23d
+genomeblocksBCR3_24d <- genomeblocksBCR(outblock24d, BCR3_24)
+genomeblocksBCR3_24d
+genomeblocksBCR3_25d <- genomeblocksBCR(outblock25d, BCR3_25)
+genomeblocksBCR3_25d
+genomeblocksBCR3_26d <- genomeblocksBCR(outblock26d, BCR3_26)
+genomeblocksBCR3_26d
+genomeblocksBCR3_27d <- genomeblocksBCR(outblock27d, BCR3_27)
+genomeblocksBCR3_27d
+genomeblocksBCR3_28d <- genomeblocksBCR(outblock28d, BCR3_28)
+genomeblocksBCR3_28d
+genomeblocksBCR3_29d <- genomeblocksBCR(outblock29d, BCR3_29)
+genomeblocksBCR3_29d
+
+genomeblocksBCR3_alld <- rbind(genomeblocksBCR3_1d,genomeblocksBCR3_2d,genomeblocksBCR3_3d,genomeblocksBCR3_4d,genomeblocksBCR3_5d,genomeblocksBCR3_6d,genomeblocksBCR3_7d,genomeblocksBCR3_8d,genomeblocksBCR3_9d,genomeblocksBCR3_10d,genomeblocksBCR3_11d,genomeblocksBCR3_12d,genomeblocksBCR3_13d,genomeblocksBCR3_14d,genomeblocksBCR3_15d,genomeblocksBCR3_16d,genomeblocksBCR3_17d,genomeblocksBCR3_18d,genomeblocksBCR3_19d,genomeblocksBCR3_20d,genomeblocksBCR3_21d,genomeblocksBCR3_22d,genomeblocksBCR3_23d,genomeblocksBCR3_24d,genomeblocksBCR3_25d,genomeblocksBCR3_26d,genomeblocksBCR3_27d,genomeblocksBCR3_28d,genomeblocksBCR3_29d)
+
+genomeblocksBCR3_alld
+boxplot(as.numeric(genomeblocksBCR3_alld[,"BCR"]) ~ genomeblocksBCR3_alld[,"type"])
+
+anova(lm(as.numeric(genomeblocksBCR3_alld[,"BCR"]) ~ as.character(genomeblocksBCR3_alld[,"type"])))
+summary(aov(as.numeric(genomeblocksBCR3_alld[,"BCR"]) ~ as.character(genomeblocksBCR3_alld[,"type"])))
+
+
+```
+
+Now we will see the patterns with CG content
+
+```{r}
+
+
+genomeblocksGC <- function(x,y) {
+GC <- matrix(NA, dim(x)[1], 1, dimnames = list(NULL, c('GC')))
+out <- cbind(x,GC)
+
+for(i in 1:dim(x)[1]) {
+
+  for(j in 1:dim(y)[1]) {
+if (as.numeric(x[i,2]) > y[j,1] &  as.numeric(x[i,2]) < y[j,2])  
+
+GCtemp <- c(as.numeric(x[i,2]), y[j,2], y[j,2] - as.numeric(x[i,2]), y[j,4])
+}
+
+  for(j in 1:dim(y)[1]) {
+if (GCtemp[1] < y[j,1] & as.numeric(x[i,3]) > y[j,2])
+  
+GCtemp2 <- rbind(GCtemp, y[j,])
+
+}
+
+ for(j in 1:dim(y)[1]) {  
+if (as.numeric(x[i,3]) > y[j,1] & as.numeric(x[i,3]) < y[j,2])
+newrow <- c(y[j,1], as.numeric(x[i,3]), as.numeric(x[i,3]) - y[j,1], y[j,4])
+GCtemp2 <- rbind(GCtemp2, newrow)
+}
+
+
+  for (k in 1:dim(GCtemp2)[1])
+out[i,6] <-   (sum(GCtemp2[k,3] * GCtemp2[k,4]) / (sum(GCtemp2[k,3])))
+}
+
+out
+
+}    
+
+y<-chr2GC
+x<-genomeblocksBCR3_2d
+genomeblocksGC(x,y)
+
+chr1GC <- read.csv("./GCcontent/chr1GCcontent.csv")
+genomeblocksCR3_1dGC <- genomeblocksGC(genomeblocksBCR3_1d,chr1GC)
+genomeblocksCR3_1dGC
+
+chr2GC <- read.csv("./GCcontent/chr1GCcontent.csv")
+genomeblocksCR3_2dGC <- genomeblocksGC(genomeblocksBCR3_2d,chr2GC)
+genomeblocksCR3_2dGC
+
+```
+
