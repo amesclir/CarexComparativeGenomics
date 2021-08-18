@@ -1980,63 +1980,7 @@ Let's make this more authomatic
 
 ```{r}
 
-genomeblocks <- function(x) {
-  out <- matrix(NA, 1, 4, dimnames = list(NULL, c('lg', 'start', 'end', 'type')))
-  out[1,] <- c(x$Chromosome.y[1], x$chromStart[1], NA,NA)
-  
-  for(i in 1:dim(x)[1]) {
-    if(x$Chromosome.y[i] == out[dim(out)[1], 1]) { 
-      out[nrow(out),3] <- x$chromStart[i]
-} else 
-  out <- rbind(out, c(x$Chromosome.y[i], x$chromStart[i], x$chromStart[i],NA)) 
-  }
-
-  
-  for(i in 1:(dim(out)[1])) {
-    if(out[i,"start"] == out[i,"end"] ) { 
-           out[i,4] <- "singlemarker" 
-} else 
-  out[i,4] <- "conserved"
-}
-
-if ((dim(out)[1]-1) != 0) {
-  
-  for(i in 1:(dim(out)[1]-1)) {
-  
-if(out[i,"type"] == "singlemarker" ) { 
-      out[i,3] <- as.numeric(out[i+1,2]) -1
-} else 
-next
-}
-
-for(i in 2:dim(out)[1]) {
-    if(out[i,"type"] == "singlemarker" ) { 
-      out[i,2] <- as.numeric(out[i-1,3]) +1
-      } else 
-  next
-}  
-  
-  
-  counter <- vector()
-   for(i in 1:(dim(out)[1]-1)) {
-    if(out[i,"type"] == "conserved" & out[i+1,"type"] == "conserved") { 
-            counter[i] <- 1 
-} else 
-counter[i] <- 0
-  }
-  
-      for(i in 1:((dim(out)[1]-1)+(sum(counter)-1))) {
-    if(out[i,"type"] == "conserved" & out[i+1,"type"] == "conserved") { 
-newrow <- c(paste(out[i], "-", out[i+1]), as.numeric(out[i,3]) +1, as.numeric(out[i+1,2]) -1, "fisfus")
-out <- rbind(out[1:i,],newrow,out[(i+1):nrow(out),])
-
-} else 
-next
-  }
-}
-  return(out)
-}
-
+source("genomeblocks.R")
 
 outblock1 <- genomeblocks(chr1)
 outblock1
@@ -2170,24 +2114,7 @@ BCR29
 
 outblock1
 
-genomeblocksBCR <- function(x,y) {
-BCR <- matrix(NA, dim(x)[1], 1, dimnames = list(NULL, c('BCR')))
-out <- cbind(x,BCR)
-
-for(i in 1:dim(x)[1]) {
-if (dim(y)[1] > 0) {  
-out[i,5] <- sum(as.numeric(y$Start) > as.numeric(x[i,"start"]) & as.numeric(y$End) < as.numeric(x[i,"end"]))/(as.numeric(x[i,"end"])-as.numeric(x[i,"start"]))*1000000
-}
-else
-out[i,5] <- 0  
-}
-
-if (out[i,5] == "NaN") {  
-out[i,5] <- 0
-  }
-
-out
-}    
+source("genomeblocksBCR.R") 
 
 genomeblocksBCR1 <- genomeblocksBCR(outblock1, BCR1)
 genomeblocksBCR1
@@ -2912,56 +2839,12 @@ Now we will see the patterns with CG content
 
 ```{r}
 
+source("genomeblocksGC.R")
 
-genomeblocksGC <- function(x,y) {
-GC <- matrix(NA, dim(x)[1], 1, dimnames = list(NULL, c('GC')))
-out <- cbind(x,GC)
-
-for(i in 1:dim(x)[1]) {
-
-  for(j in 1:dim(y)[1]) {
-if (as.numeric(x[i,2]) > y[j,1] &  as.numeric(x[i,2]) < y[j,2])  
-
-GCtemp <- c(as.numeric(x[i,2]), y[j,2], y[j,2] - as.numeric(x[i,2]), y[j,4])
-}
-
-if (GCtemp[2] < x[i,3]) { 
-
-  
-  for(j in 1:dim(y)[1]) {
-if (GCtemp[1] < y[j,1] & as.numeric(x[i,3]) > y[j,2])
-  
-GCtemp2 <- rbind(GCtemp, y[j,])
-
-  } 
-  
-for(j in 1:dim(y)[1]) {  
-if (as.numeric(x[i,3]) > y[j,1] & as.numeric(x[i,3]) < y[j,2])
-newrow <- c(y[j,1], as.numeric(x[i,3]), as.numeric(x[i,3]) - y[j,1], y[j,4])
-GCtemp3 <- rbind(GCtemp2, newrow)
-
-}  
-  
-  }
-else
-{
-GCtemp3 <- GCtemp
-GCtemp3<-matrix(GCtemp3,ncol=4)
-}
-
-  
-out[i,6] <-   sum(as.numeric(GCtemp3[,3]) * as.numeric(GCtemp3[,4])) / sum(as.numeric(GCtemp3[,3]))
-
-}
-
-out
-
-}    
-
-y<-chr2GC
-x<-genomeblocksBCR3_2d
-i <- 3
-genomeblocksGC(x,y)
+#y<-chr2GC
+#x<-genomeblocksBCR3_2d
+#i <- 3
+#genomeblocksGC(x,y)
 
 chr1GC <- read.csv("./GCcontent/chr1GCcontent.csv")
 genomeblocksBCR3_1dGC <- genomeblocksGC(genomeblocksBCR3_1d,chr1GC)
