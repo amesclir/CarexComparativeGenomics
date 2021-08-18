@@ -2975,3 +2975,143 @@ summary(lm(as.numeric(genomeblocksBCR3_alldGC[,"GC"]) ~ as.numeric(genomeblocksB
 
 ```
 
+Now we are going to check whats going on with genes
+
+```{r}
+
+#Using the genome with duplicates
+
+Genes <- read.csv("genes.csv")
+#Somewhat similar sequences (blastn), default
+
+Genes1 <- Genes[Genes$Chromosome=="chr1",]
+Genes1
+Genes2 <- Genes[Genes$Chromosome=="chr2",]
+Genes2
+Genes3 <- Genes[Genes$Chromosome=="chr3",]
+Genes3
+Genes4 <- Genes[Genes$Chromosome=="chr4",]
+Genes4
+Genes5 <- Genes[Genes$Chromosome=="chr5",]
+Genes5
+Genes6 <- Genes[Genes$Chromosome=="chr6",]
+Genes6
+Genes7 <- Genes[Genes$Chromosome=="chr7",]
+Genes7
+Genes8 <- Genes[Genes$Chromosome=="chr8",]
+Genes8
+Genes9 <- Genes[Genes$Chromosome=="chr9",]
+Genes9
+Genes10 <- Genes[Genes$Chromosome=="chr10",]
+Genes10
+Genes11 <- Genes[Genes$Chromosome=="chr11",]
+Genes11
+Genes12 <- Genes[Genes$Chromosome=="chr12",]
+Genes12
+Genes13 <- Genes[Genes$Chromosome=="chr13",]
+Genes13
+Genes14 <- Genes[Genes$Chromosome=="chr14",]
+Genes14
+Genes15 <- Genes[Genes$Chromosome=="chr15",]
+Genes15
+Genes16 <- Genes[Genes$Chromosome=="chr16",]
+Genes16
+Genes17 <- Genes[Genes$Chromosome=="chr17",]
+Genes17
+Genes18 <- Genes[Genes$Chromosome=="chr18",]
+Genes18
+Genes19 <- Genes[Genes$Chromosome=="chr19",]
+Genes19
+Genes20 <- Genes[Genes$Chromosome=="chr20",]
+Genes20
+Genes21 <- Genes[Genes$Chromosome=="chr21",]
+Genes21
+Genes22 <- Genes[Genes$Chromosome=="chr22",]
+Genes22
+Genes23 <- Genes[Genes$Chromosome=="chr23",]
+Genes23
+Genes24 <- Genes[Genes$Chromosome=="chr24",]
+Genes24
+Genes25 <- Genes[Genes$Chromosome=="chr25",]
+Genes25
+Genes26 <- Genes[Genes$Chromosome=="chr26",]
+Genes26
+Genes27 <- Genes[Genes$Chromosome=="chr27",]
+Genes27
+Genes28 <- Genes[Genes$Chromosome=="chr28",]
+Genes28
+Genes29 <- Genes[Genes$Chromosome=="chr29",]
+Genes29
+
+
+#We can use the same function than with the BCR, something very similar
+source("genomeblocksGenes.R")
+genomeblocksGenes1d <- genomeblocksGenes(genomeblocksBCR3_1dGC, Genes1)
+genomeblocksGenes1d
+genomeblocksGenes2d <- genomeblocksGenes(genomeblocksBCR3_2dGC, Genes2)
+genomeblocksGenes2d
+genomeblocksGenes3d <- genomeblocksGenes(genomeblocksBCR3_3dGC, Genes3)
+genomeblocksGenes3d
+genomeblocksGenes4d <- genomeblocksGenes(genomeblocksBCR3_4dGC, Genes4)
+genomeblocksGenes4d
+genomeblocksGenes5d <- genomeblocksGenes(genomeblocksBCR3_5dGC, Genes5)
+genomeblocksGenes5d
+genomeblocksGenes6d <- genomeblocksGenes(genomeblocksBCR3_6dGC, Genes6)
+genomeblocksGenes6d
+genomeblocksGenes7d <- genomeblocksGenes(genomeblocksBCR3_7dGC, Genes7)
+genomeblocksGenes7d
+genomeblocksGenes8d <- genomeblocksGenes(genomeblocksBCR3_8dGC, Genes8)
+genomeblocksGenes8d
+genomeblocksGenes9d <- genomeblocksGenes(genomeblocksBCR3_9dGC, Genes9)
+genomeblocksGenes9d
+genomeblocksGenes10d <- genomeblocksGenes(genomeblocksBCR3_10dGC, Genes10)
+genomeblocksGenes10d
+genomeblocksGenes11d <- genomeblocksGenes(genomeblocksBCR3_11dGC, Genes11)
+genomeblocksGenes11d
+genomeblocksGenes12d <- genomeblocksGenes(genomeblocksBCR3_12dGC, Genes12)
+genomeblocksGenes12d
+genomeblocksGenes13d <- genomeblocksGenes(genomeblocksBCR3_13dGC, Genes13)
+genomeblocksGenes13d
+genomeblocksGenes14d <- genomeblocksGenes(genomeblocksBCR3_14dGC, Genes14)
+genomeblocksGenes14d
+genomeblocksGenes15d <- genomeblocksGenes(genomeblocksBCR3_15dGC, Genes15)
+genomeblocksGenes15d
+genomeblocksGenes16d <- genomeblocksGenes(genomeblocksBCR3_16dGC, Genes16)
+genomeblocksGenes16d
+genomeblocksGenes17d <- genomeblocksGenes(genomeblocksBCR3_17dGC, Genes17)
+genomeblocksGenes17d
+genomeblocksGenes18d <- genomeblocksGenes(genomeblocksBCR3_18dGC, Genes18)
+genomeblocksGenes18d
+genomeblocksGenes19d <- genomeblocksGenes(genomeblocksBCR3_19dGC, Genes19)
+genomeblocksGenes19d
+genomeblocksGenes20d <- genomeblocksGenes(genomeblocksBCR3_20dGC, Genes20)
+genomeblocksGenes20d
+genomeblocksGenes21d <- genomeblocksGenes(genomeblocksBCR3_21dGC, Genes21)
+genomeblocksGenes21d
+genomeblocksGenes22d <- genomeblocksGenes(genomeblocksBCR3_22dGC, Genes22)
+genomeblocksGenes22d
+genomeblocksGenes23d <- genomeblocksGenes(genomeblocksBCR3_23dGC, Genes23)
+genomeblocksGenes23d
+genomeblocksGenes24d <- genomeblocksGenes(genomeblocksBCR3_24dGC, Genes24)
+genomeblocksGenes24d
+genomeblocksGenes25d <- genomeblocksGenes(genomeblocksBCR3_25dGC, Genes25)
+genomeblocksGenes25d
+genomeblocksGenes26d <- genomeblocksGenes(genomeblocksBCR3_26dGC, Genes26)
+genomeblocksGenes26d
+genomeblocksGenes27d <- genomeblocksGenes(genomeblocksBCR3_27dGC, Genes27)
+genomeblocksGenes27d
+genomeblocksGenes28d <- genomeblocksGenes(genomeblocksBCR3_28dGC, Genes28)
+genomeblocksGenes28d
+genomeblocksGenes29d <- genomeblocksGenes(genomeblocksBCR3_29dGC, Genes29)
+genomeblocksGenes29d
+
+genomeblocksGenesalld <- rbind(genomeblocksGenes1d,genomeblocksGenes2d,genomeblocksGenes3d,genomeblocksGenes4d,genomeblocksGenes5d,genomeblocksGenes6d,genomeblocksGenes7d,genomeblocksGenes8d,genomeblocksGenes9d,genomeblocksGenes10d,genomeblocksGenes11d,genomeblocksGenes12d,genomeblocksGenes13d,genomeblocksGenes14d,genomeblocksGenes15d,genomeblocksGenes16d,genomeblocksGenes17d,genomeblocksGenes18d,genomeblocksGenes19d,genomeblocksGenes20d,genomeblocksGenes21d,genomeblocksGenes22d,genomeblocksGenes23d,genomeblocksGenes24d,genomeblocksGenes25d,genomeblocksGenes26d,genomeblocksGenes27d,genomeblocksGenes28d,genomeblocksGenes29d)
+
+genomeblocksGenesalld
+boxplot(as.numeric(genomeblocksGenesalld[,"Genes"]) ~ genomeblocksGenesalld[,"type"])
+
+anova(lm(as.numeric(genomeblocksGenesalld[,"Genes"]) ~ as.character(genomeblocksGenesalld[,"type"])))
+summary(aov(as.numeric(genomeblocksGenesalld[,"Genes"]) ~ as.character(genomeblocksGenesalld[,"type"])))
+
+```
+
