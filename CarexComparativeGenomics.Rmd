@@ -3115,3 +3115,23 @@ summary(aov(as.numeric(genomeblocksGenesalld[,"Genes"]) ~ as.character(genomeblo
 
 ```
 
+
+Simulating the rearrangements!
+
+```{r}
+
+source("fisfusmodeling.R") 
+rearrangements = 100
+pfis = 0.5
+
+genome = cbind(c("LG1", "LG1", "LG1", "LG2", "LG2", "LG2", "LG3", "LG3", "LG3"),c(1,1000,10000,1,1000,10000,1,1000,10000), NA, c("M1","M2","M3","M4","M5","M6","M7","M8","M9" ))
+colnames(genome) <- c("Chromosome","chromStart","chromEnd","Marker")
+genome <- as.data.frame(genome)
+genome
+
+littledaleimodel <- fisfusmodelling(bowtie2, rearrangements,pfis)
+
+unique(littledaleimodel[[100]][,1])
+
+```
+

@@ -10,9 +10,9 @@ genomeblocksGenes <- function(x,y) {
       out[i,7] <- 0  
   }
   
-  if (out[i,7] == "NaN") {  
-    out[i,7] <- 0
-  }
+ # if (out[i,7] == "NaN") {  
+ #   out[i,7] <- 0
+ # }
   
   out
 }   

@@ -10,9 +10,9 @@ genomeblocksBCR <- function(x,y) {
       out[i,5] <- 0  
   }
   
-  if (out[i,5] == "NaN") {  
-    out[i,5] <- 0
-  }
+#  if (out[i,5] == "NaN") {  
+#    out[i,5] <- 0
+#  }
   
   out
 }   

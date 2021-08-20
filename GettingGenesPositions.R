@@ -132,3 +132,4 @@ genes29
 
 genes <- rbind(genes1, genes2, genes3, genes4, genes5, genes6, genes7, genes8, genes9, genes10, genes11 , genes12, genes13, genes14, genes15, genes16, genes17, genes18, genes19, genes20, genes21, genes22, genes23, genes24, genes25, genes26, genes27, genes28, genes29)
 write.csv(genes, file = "genes.csv")
+
