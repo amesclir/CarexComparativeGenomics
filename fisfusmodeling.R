@@ -37,6 +37,7 @@ for(k in 1:((dim(genome[genome[,1] == fissionLG,])[1])-1)) {
   subLGb <- rbind(newrow,genome[genome[,1] == fissionLG &  as.numeric(genome[,2]) > fissionpoint,])
   subLGb[,1] <- paste(subLGb[,1],"b",sep="")
   subLGb[,2] <- as.numeric(subLGb[,2]) - as.numeric(subLGb[1,2]) + 1
+  subLGb[,3] <- as.numeric(subLGb[,2]) + 1
   subgenome <- rbind(subLGa,subLGb)
   genome <- rbind(genome[genome[,1] != fissionLG,],subgenome)
 }  
@@ -57,6 +58,7 @@ else
   fusionLG <- sample(unique(genome[,1]), size = 2, replace = FALSE, prob = probchrom)  
   subgenome <- rbind(genome[genome[,1]==fusionLG[1],],genome[genome[,1]==fusionLG[2],])
   subgenome[subgenome[,1]==unique(subgenome[,1])[2],2] <- as.numeric(subgenome[subgenome[,1]==unique(subgenome[,1])[2],2]) + max(as.numeric(subgenome[subgenome[,1]==unique(subgenome[,1])[1],2])) + 100
+  subgenome[subgenome[,1]==unique(subgenome[,1])[2],3] <-subgenome[subgenome[,1]==unique(subgenome[,1])[2],2]  + 1
   #subgenome[,1] <- paste(unique(subgenome[,1])[1], unique(subgenome[,1])[2], sep="")
   subgenome[,1] <- unique(subgenome[,1])[1]
   genome <- rbind(genome[genome[,1] != fusionLG[1] & genome[,1] != fusionLG[2],],subgenome)

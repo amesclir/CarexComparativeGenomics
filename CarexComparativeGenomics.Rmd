@@ -3121,17 +3121,25 @@ Simulating the rearrangements!
 ```{r}
 
 source("fisfusmodeling.R") 
-rearrangements = 100
-pfis = 0.5
 
-genome = cbind(c("LG1", "LG1", "LG1", "LG2", "LG2", "LG2", "LG3", "LG3", "LG3"),c(1,1000,10000,1,1000,10000,1,1000,10000), NA, c("M1","M2","M3","M4","M5","M6","M7","M8","M9" ))
-colnames(genome) <- c("Chromosome","chromStart","chromEnd","Marker")
-genome <- as.data.frame(genome)
-genome
+#genome = cbind(c("LG1", "LG1", "LG1", "LG2", "LG2", "LG2", "LG3", "LG3", #"LG3"),c(1,1000,10000,1,1000,10000,1,1000,10000), NA, c("M1","M2","M3","M4","M5","M6","M7","M8","M9" ))
+#colnames(genome) <- c("Chromosome","chromStart","chromEnd","Marker")
+#genome <- as.data.frame(genome)
+#genome
+
+
+# Carex scoparia and Carex littledalei got separated 29 mya median and 34 mya estimated, let's use 30 mya
+# rate of fission based on Marquez-Corro et al., 2019 2.50 fissions per million year and 2.13 fussion per million year
+# number of rearrangements are 4.63 events per million year x 60 my (30 + 30 million years)
+# pfis = 2.50/(2.50+2.13)
+rearrangements = 278
+pfis = 0.5399568
+
 
 littledaleimodel <- fisfusmodelling(bowtie2, rearrangements,pfis)
 
-unique(littledaleimodel[[100]][,1])
+littledaleimodel[[279]]
+unique(littledaleimodel[[279]][,1])
 
 ```
 
