@@ -3138,8 +3138,100 @@ pfis = 0.5399568
 
 littledaleimodel <- fisfusmodelling(bowtie2, rearrangements,pfis)
 
-littledaleimodel[[279]]
-unique(littledaleimodel[[279]][,1])
+littledaleimodel279 <- littledaleimodel[[279]]
+
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[1],1] <- "LG1"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[2],1] <- "LG2"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[3],1] <- "LG3"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[4],1] <- "LG4"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[5],1] <- "LG5"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[6],1] <- "LG6"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[7],1] <- "LG7"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[8],1] <- "LG8"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[9],1] <- "LG9"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[10],1] <- "LG10"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[11],1] <- "LG11"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[12],1] <- "LG12"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[13],1] <- "LG13"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[14],1] <- "LG14"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[15],1] <- "LG15"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[16],1] <- "LG16"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[17],1] <- "LG17"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[18],1] <- "LG18"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[19],1] <- "LG19"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[20],1] <- "LG20"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[21],1] <- "LG21"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[22],1] <- "LG22"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[23],1] <- "LG23"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[24],1] <- "LG24"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[25],1] <- "LG25"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[26],1] <- "LG26"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[27],1] <- "LG27"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[28],1] <- "LG28"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[29],1] <- "LG29"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[30],1] <- "LG30"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[31],1] <- "LG31"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[32],1] <- "LG32"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[33],1] <- "LG33"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[34],1] <- "LG34"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[35],1] <- "LG35"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[36],1] <- "LG36"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[37],1] <- "LG37"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[38],1] <- "LG38"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[39],1] <- "LG39"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[40],1] <- "LG40"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[41],1] <- "LG41"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[42],1] <- "LG42"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[43],1] <- "LG43"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[44],1] <- "LG44"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[45],1] <- "LG45"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[46],1] <- "LG46"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[47],1] <- "LG47"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[48],1] <- "LG48"
+
+
+both[1:29,]
+
+maximum <- vector()
+for (i in 1:length(unique(littledaleimodel279[,1])))
+maximum[i] <- max(littledaleimodel279[littledaleimodel279[,1]==unique(littledaleimodel279[,1])[i],2])
+maximum
+
+littledaleimodel279genome <- cbind(unique(littledaleimodel279[,1]),0,maximum, NA, NA)
+colnames(littledaleimodel279genome) <- colnames(both)
+
+genomesim <- rbind(both[1:29,],littledaleimodel279genome) 
+
+chr.exclude <- NULL
+cyto.info <- genomesim
+tracks.inside <- 0
+tracks.outside <- 0
+RCircos.Set.Core.Components(cyto.info, chr.exclude,tracks.inside, tracks.outside)
+
+
+rcircos.params <- RCircos.Get.Plot.Parameters()
+rcircos.cyto <- RCircos.Get.Plot.Ideogram()
+rcircos.position <- RCircos.Get.Plot.Positions()
+RCircos.List.Plot.Parameters()
+
+ 
+
+rcircos.params <- RCircos.Get.Plot.Parameters()
+rcircos.params$base.per.unit <- 3000
+RCircos.Reset.Plot.Parameters(rcircos.params)
+RCircos.List.Plot.Parameters()
+
+RCircos.Set.Plot.Area()
+RCircos.Chromosome.Ideogram.Plot()
+
+
+linkssim <- merge(bowtie2, littledaleimodel279, by.x = "Marker", by.y = "Marker", sort = F)
+linkssim <- linkssim[,c(2,3,4,5,6,7)]
+linkssim
+
+RCircos.Link.Plot(linkssim, track.num, TRUE)
+
+
 
 ```
 
