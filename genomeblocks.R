@@ -1,12 +1,12 @@
 genomeblocks <- function(x) {
   out <- matrix(NA, 1, 4, dimnames = list(NULL, c('lg', 'start', 'end', 'type')))
-  out[1,] <- c(x$Chromosome.y[1], x$chromStart[1], NA,NA)
+  out[1,] <- c(x[1,4], x[1,2], NA,NA)
   
   for(i in 1:dim(x)[1]) {
-    if(x$Chromosome.y[i] == out[dim(out)[1], 1]) { 
-      out[nrow(out),3] <- x$chromStart[i]
+    if(x[i,4] == out[dim(out)[1], 1]) { 
+      out[nrow(out),3] <- x[i,2]
     } else 
-      out <- rbind(out, c(x$Chromosome.y[i], x$chromStart[i], x$chromStart[i],NA)) 
+      out <- rbind(out, c(x[i,4], x[i,2], x[i,2],NA)) 
   }
   
   

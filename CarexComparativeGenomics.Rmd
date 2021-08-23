@@ -33,7 +33,7 @@ head(UCSC.Baylor.3.4.Rat.cytoBandIdeogram)
 
 chr.exclude <- NULL
 cyto.info <- UCSC.HG19.Human.CytoBandIdeogram
-cyto.info <- RCircos.Gene.Label.Data
+#cyto.info <- RCircos.Gene.Label.Data
 tracks.inside <- 10
 tracks.outside <- 0
 RCircos.Set.Core.Components(cyto.info, chr.exclude,tracks.inside, tracks.outside)
@@ -173,6 +173,7 @@ links <- merge(bowtie2, both, by.x = "Marker", by.y = "Band", sort = F)
 links <- links[,c(2,3,4,5,6,7)]
 links
 
+track.num <- 1
 RCircos.Link.Plot(links, track.num, TRUE)
 
 out.file <- "ComparativeGenomicsLG1.pdf"
@@ -3122,11 +3123,14 @@ Simulating the rearrangements!
 
 source("fisfusmodeling.R") 
 
-#genome = cbind(c("LG1", "LG1", "LG1", "LG2", "LG2", "LG2", "LG3", "LG3", #"LG3"),c(1,1000,10000,1,1000,10000,1,1000,10000), NA, c("M1","M2","M3","M4","M5","M6","M7","M8","M9" ))
-#colnames(genome) <- c("Chromosome","chromStart","chromEnd","Marker")
-#genome <- as.data.frame(genome)
-#genome
+genome = cbind(c("LG1", "LG1","LG1", "LG1", "LG1", "LG2", "LG2", "LG2", "LG2", "LG2", "LG3", "LG3", "LG3", "LG3", "LG3"),c(0,1000000, 3000000, 9000000, 10000000, 0,1000000, 3000000, 9000000, 10000000, 0,1000000, 3000000, 9000000, 10000000), c(1,1000001, 3000001, 9000001, 10000001, 1,1000001, 3000001, 9000001, 10000001, 0,1000001, 3000001, 9000001, 10000001), c(NA, "M1","M2","M3",NA,NA,"M4","M5","M6",NA,NA,"M7","M8","M9",NA ))
+colnames(genome) <- c("Chromosome","chromStart","chromEnd","Marker")
+genome <- as.data.frame(genome)
+genome
 
+rearrangements = 10
+pfis = 0.5
+fisfusmodelling(genome, rearrangements,pfis)
 
 # Carex scoparia and Carex littledalei got separated 29 mya median and 34 mya estimated, let's use 30 mya
 # rate of fission based on Marquez-Corro et al., 2019 2.50 fissions per million year and 2.13 fussion per million year
@@ -3135,8 +3139,100 @@ source("fisfusmodeling.R")
 rearrangements = 278
 pfis = 0.5399568
 
+genome <- rbind(
+c("chr1",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr1",][order(bowtie2[bowtie2[,1]=="chr1",2]),], 
+c(both[1,1],both[1,3]-1,both[1,3],NA), 
+c("chr2",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr2",][order(bowtie2[bowtie2[,1]=="chr2",2]),], 
+c(both[2,1],both[2,3]-1,both[2,3],NA),
+c("chr3",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr3",][order(bowtie2[bowtie2[,1]=="chr3",2]),], 
+c(both[3,1],both[3,3]-1,both[3,3],NA),
+c("chr4",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr4",][order(bowtie2[bowtie2[,1]=="chr4",2]),], 
+c(both[4,1],both[4,3]-1,both[4,3],NA),
+c("chr4",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr4",][order(bowtie2[bowtie2[,1]=="chr4",2]),], 
+c(both[4,1],both[4,3]-1,both[4,3],NA),
+c("chr5",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr5",][order(bowtie2[bowtie2[,1]=="chr5",2]),], 
+c(both[5,1],both[5,3]-1,both[5,3],NA),
+c("chr6",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr6",][order(bowtie2[bowtie2[,1]=="chr6",2]),], 
+c(both[6,1],both[6,3]-1,both[6,3],NA),
+c("chr7",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr7",][order(bowtie2[bowtie2[,1]=="chr7",2]),], 
+c(both[7,1],both[7,3]-1,both[7,3],NA),
+c("chr8",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr8",][order(bowtie2[bowtie2[,1]=="chr8",2]),], 
+c(both[8,1],both[8,3]-1,both[8,3],NA),
+c("chr9",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr9",][order(bowtie2[bowtie2[,1]=="chr9",2]),], 
+c(both[9,1],both[9,3]-1,both[9,3],NA),
+c("chr10",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr10",][order(bowtie2[bowtie2[,1]=="chr10",2]),], 
+c(both[10,1],both[10,3]-1,both[10,3],NA),
+c("chr11",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr11",][order(bowtie2[bowtie2[,1]=="chr11",2]),], 
+c(both[11,1],both[11,3]-1,both[11,3],NA),
+c("chr12",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr12",][order(bowtie2[bowtie2[,1]=="chr12",2]),], 
+c(both[12,1],both[12,3]-1,both[12,3],NA),
+c("chr13",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr13",][order(bowtie2[bowtie2[,1]=="chr13",2]),], 
+c(both[13,1],both[13,3]-1,both[13,3],NA),
+c("chr14",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr14",][order(bowtie2[bowtie2[,1]=="chr14",2]),], 
+c(both[14,1],both[14,3]-1,both[14,3],NA),
+c("chr15",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr15",][order(bowtie2[bowtie2[,1]=="chr15",2]),], 
+c(both[15,1],both[15,3]-1,both[15,3],NA),
+c("chr16",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr16",][order(bowtie2[bowtie2[,1]=="chr16",2]),], 
+c(both[16,1],both[16,3]-1,both[16,3],NA),
+c("chr17",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr17",][order(bowtie2[bowtie2[,1]=="chr17",2]),], 
+c(both[17,1],both[17,3]-1,both[17,3],NA),
+c("chr18",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr18",][order(bowtie2[bowtie2[,1]=="chr18",2]),], 
+c(both[18,1],both[18,3]-1,both[18,3],NA),
+c("chr19",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr19",][order(bowtie2[bowtie2[,1]=="chr19",2]),], 
+c(both[19,1],both[19,3]-1,both[19,3],NA),
+c("chr20",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr20",][order(bowtie2[bowtie2[,1]=="chr20",2]),], 
+c(both[20,1],both[20,3]-1,both[20,3],NA),
+c("chr21",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr21",][order(bowtie2[bowtie2[,1]=="chr21",2]),], 
+c(both[21,1],both[21,3]-1,both[21,3],NA),
+c("chr22",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr22",][order(bowtie2[bowtie2[,1]=="chr22",2]),], 
+c(both[22,1],both[22,3]-1,both[22,3],NA),
+c("chr23",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr23",][order(bowtie2[bowtie2[,1]=="chr23",2]),], 
+c(both[23,1],both[23,3]-1,both[23,3],NA),
+c("chr24",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr24",][order(bowtie2[bowtie2[,1]=="chr24",2]),], 
+c(both[24,1],both[24,3]-1,both[24,3],NA),
+c("chr25",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr25",][order(bowtie2[bowtie2[,1]=="chr25",2]),], 
+c(both[25,1],both[25,3]-1,both[25,3],NA),
+c("chr26",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr26",][order(bowtie2[bowtie2[,1]=="chr26",2]),], 
+c(both[26,1],both[26,3]-1,both[26,3],NA),
+c("chr27",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr27",][order(bowtie2[bowtie2[,1]=="chr27",2]),], 
+c(both[27,1],both[27,3]-1,both[27,3],NA),
+c("chr28",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr28",][order(bowtie2[bowtie2[,1]=="chr28",2]),], 
+c(both[28,1],both[28,3]-1,both[28,3],NA),
+c("chr29",0,1,NA),  
+bowtie2[bowtie2[,1]=="chr29",][order(bowtie2[bowtie2[,1]=="chr29",2]),], 
+c(both[29,1],both[29,3]-1,both[29,3],NA)
+)
 
-littledaleimodel <- fisfusmodelling(bowtie2, rearrangements,pfis)
+littledaleimodel <- fisfusmodelling(genome, rearrangements,pfis)
 
 littledaleimodel279 <- littledaleimodel[[279]]
 
@@ -3188,20 +3284,27 @@ littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[4
 littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[46],1] <- "LG46"
 littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[47],1] <- "LG47"
 littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[48],1] <- "LG48"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[49],1] <- "LG49"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[50],1] <- "LG50"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[51],1] <- "LG51"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[52],1] <- "LG52"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[53],1] <- "LG53"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[54],1] <- "LG54"
+littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[55],1] <- "LG55"
+
 
 
 both[1:29,]
-
 maximum <- vector()
 for (i in 1:length(unique(littledaleimodel279[,1])))
-maximum[i] <- max(littledaleimodel279[littledaleimodel279[,1]==unique(littledaleimodel279[,1])[i],2])
-maximum
+maximum[i] <- max(littledaleimodel279[littledaleimodel279[,1] == unique(littledaleimodel279[,1])[i],3])  
+littledaleimodel279genome <- cbind(unique(littledaleimodel279[,1]),0,maximum,NA,NA)
+colnames(littledaleimodel279genome) <- colnames(both[1:5])
+genomesim <- rbind(both[1:29,1:5],littledaleimodel279genome) 
 
-littledaleimodel279genome <- cbind(unique(littledaleimodel279[,1]),0,maximum, NA, NA)
-colnames(littledaleimodel279genome) <- colnames(both)
+genomesim <- as.data.frame(genomesim)
 
-genomesim <- rbind(both[1:29,],littledaleimodel279genome) 
-
+library(RCircos)
 chr.exclude <- NULL
 cyto.info <- genomesim
 tracks.inside <- 0
@@ -3216,22 +3319,146 @@ RCircos.List.Plot.Parameters()
 
  
 
-rcircos.params <- RCircos.Get.Plot.Parameters()
-rcircos.params$base.per.unit <- 3000
-RCircos.Reset.Plot.Parameters(rcircos.params)
-RCircos.List.Plot.Parameters()
 
 RCircos.Set.Plot.Area()
 RCircos.Chromosome.Ideogram.Plot()
 
+genome <- genome[complete.cases(genome),]
+littledaleimodel279 <- littledaleimodel279[complete.cases(littledaleimodel279),]
 
-linkssim <- merge(bowtie2, littledaleimodel279, by.x = "Marker", by.y = "Marker", sort = F)
+linkssim <- merge(genome, littledaleimodel279, by = "Marker", sort = F, no.dups = TRUE)
+length(genome[,4])
+length(unique(genome[,4]))
+dim(linkssim)
+linkssim <- unique(linkssim)
 linkssim <- linkssim[,c(2,3,4,5,6,7)]
 linkssim
+linkssim <- as.data.frame(linkssim)
+RCircos.Link.Plot(linkssim,track.num=1,TRUE)
+#There is an error here. Maybe consider to use other package
 
-RCircos.Link.Plot(linkssim, track.num, TRUE)
+chr1dsim <- linkssim[linkssim$Chromosome.x=="chr1",]
+chr1dsim
+chr2dsim <- linkssim[linkssim$Chromosome.x=="chr2",]
+chr2dsim
+chr3dsim <- linkssim[linkssim$Chromosome.x=="chr3",]
+chr3dsim
+chr4dsim <- linkssim[linkssim$Chromosome.x=="chr4",]
+chr4dsim
+chr5dsim <- linkssim[linkssim$Chromosome.x=="chr5",]
+chr5dsim
+chr6dsim <- linkssim[linkssim$Chromosome.x=="chr6",]
+chr6dsim
+chr7dsim <- linkssim[linkssim$Chromosome.x=="chr7",]
+chr7dsim
+chr8dsim <- linkssim[linkssim$Chromosome.x=="chr8",]
+chr8dsim
+chr9dsim <- linkssim[linkssim$Chromosome.x=="chr9",]
+chr9dsim
+chr10dsim <- linkssim[linkssim$Chromosome.x=="chr10",]
+chr10dsim
+chr11dsim <- linkssim[linkssim$Chromosome.x=="chr11",]
+chr11dsim
+chr12dsim <- linkssim[linkssim$Chromosome.x=="chr12",]
+chr12dsim
+chr13dsim <- linkssim[linkssim$Chromosome.x=="chr13",]
+chr13dsim
+chr14dsim <- linkssim[linkssim$Chromosome.x=="chr14",]
+chr14dsim
+chr15dsim <- linkssim[linkssim$Chromosome.x=="chr15",]
+chr15dsim
+chr16dsim <- linkssim[linkssim$Chromosome.x=="chr16",]
+chr16dsim
+chr17dsim <- linkssim[linkssim$Chromosome.x=="chr17",]
+chr17dsim
+chr18dsim <- linkssim[linkssim$Chromosome.x=="chr18",]
+chr18dsim
+chr19dsim <- linkssim[linkssim$Chromosome.x=="chr19",]
+chr19dsim
+chr20dsim <- linkssim[linkssim$Chromosome.x=="chr20",]
+chr20dsim
+chr21dsim <- linkssim[linkssim$Chromosome.x=="chr21",]
+chr21dsim
+chr22dsim <- linkssim[linkssim$Chromosome.x=="chr22",]
+chr22dsim
+chr23dsim <- linkssim[linkssim$Chromosome.x=="chr23",]
+chr23dsim
+chr24dsim <- linkssim[linkssim$Chromosome.x=="chr24",]
+chr24dsim
+chr25dsim <- linkssim[linkssim$Chromosome.x=="chr25",]
+chr25dsim
+chr26dsim <- linkssim[linkssim$Chromosome.x=="chr26",]
+chr26dsim
+chr27dsim <- linkssim[linkssim$Chromosome.x=="chr27",]
+chr27dsim
+chr28dsim <- linkssim[linkssim$Chromosome.x=="chr28",]
+chr28dsim
+chr29dsim <- linkssim[linkssim$Chromosome.x=="chr29",]
+chr29dsim
 
+source("genomeblocks.R")
+outblock1dsim <- genomeblocks(chr1dsim)
+outblock1dsim
+outblock2dsim <- genomeblocks(chr2dsim)
+outblock2dsim
+outblock3dsim <- genomeblocks(chr3dsim)
+outblock3dsim
+outblock4dsim <- genomeblocks(chr4dsim)
+outblock4dsim
+outblock5dsim <- genomeblocks(chr5dsim)
+outblock5dsim
+outblock6dsim <- genomeblocks(chr6dsim)
+outblock6dsim
+outblock7dsim <- genomeblocks(chr7dsim)
+outblock7dsim
+outblock8dsim <- genomeblocks(chr8dsim)
+outblock8dsim
+outblock9dsim <- genomeblocks(chr9dsim)
+outblock9dsim
+outblock10dsim <- genomeblocks(chr10dsim)
+outblock10dsim
+outblock11dsim <- genomeblocks(chr11dsim)
+outblock11dsim
+outblock12dsim <- genomeblocks(chr12dsim)
+outblock12dsim
+outblock13dsim <- genomeblocks(chr13dsim)
+outblock13dsim
+outblock14dsim <- genomeblocks(chr14dsim)
+outblock14dsim
+outblock15dsim <- genomeblocks(chr15dsim)
+outblock15dsim
+outblock16dsim <- genomeblocks(chr16dsim)
+outblock16dsim
+outblock17dsim <- genomeblocks(chr17dsim)
+outblock17dsim
+outblock18dsim <- genomeblocks(chr18dsim)
+outblock18dsim
+outblock19dsim <- genomeblocks(chr19dsim)
+outblock19dsim
+outblock20dsim <- genomeblocks(chr20dsim)
+outblock20dsim
+outblock21dsim <- genomeblocks(chr21dsim)
+outblock21dsim
+outblock22dsim <- genomeblocks(chr22dsim)
+outblock22dsim
+outblock23dsim <- genomeblocks(chr23dsim)
+outblock23dsim
+outblock24dsim <- genomeblocks(chr24dsim)
+outblock24dsim
+outblock25dsim <- genomeblocks(chr25dsim)
+outblock25dsim
+outblock26dsim <- genomeblocks(chr26dsim)
+outblock26dsim
+outblock27dsim <- genomeblocks(chr27dsim)
+outblock27dsim
+outblock28dsim <- genomeblocks(chr28dsim)
+outblock28dsim
+outblock29dsim <- genomeblocks(chr29dsim)
+outblock29dsim
 
+outblockdsim <- rbind(outblock1dsim,outblock2dsim,outblock3dsim,outblock4dsim,outblock5dsim,outblock6dsim,outblock7dsim,outblock8dsim,outblock9dsim,outblock10dsim,outblock11dsim,outblock12dsim,outblock13dsim,outblock14dsim,outblock15dsim,outblock16dsim,outblock17dsim,outblock18dsim,outblock19dsim,outblock20dsim,outblock21dsim,outblock22dsim,outblock23dsim,outblock24dsim,outblock25dsim,outblock26dsim,outblock27dsim,outblock28dsim,outblock29dsim)
+
+dim(outblockdsim[outblockdsim[,4]=="conserved",])
 
 ```
 
