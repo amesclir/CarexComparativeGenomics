@@ -43,14 +43,15 @@ genomeblocks <- function(x) {
         counter[i] <- 0
     }
     
+    if (((dim(out)[1]-1)+(sum(counter)-1)) != 0) {
     for(i in 1:((dim(out)[1]-1)+(sum(counter)-1))) {
       if(out[i,"type"] == "conserved" & out[i+1,"type"] == "conserved") { 
         newrow <- c(paste(out[i], "-", out[i+1]), as.numeric(out[i,3]) +1, as.numeric(out[i+1,2]) -1, "fisfus")
         out <- rbind(out[1:i,],newrow,out[(i+1):nrow(out),])
         
-      } else 
-        next
+      } 
     }
+    }  
   }
   return(out)
 }
