@@ -3474,11 +3474,11 @@ source("fisfusmodelingperm.R")
 rearrangements = 435
 pfis = 0.5
 perm = 100
-
+#make sure the genome object is right
 
 littledaleimodelperm <- fisfusmodellingperm(genome, rearrangements,pfis,perm)
 #littledaleimodelperm <- littledaleimodelpermcopy
-#We have probably run the analysis without the start and ending of the chromosomes!!!
+#littledaleimodelperm <- littledaleimodelpermcopy
 
 littledaleimodelperm[[1]]
 
@@ -3696,33 +3696,37 @@ outblockdsimperm[[i]] <- rbind(outblock1dsimperm[[i]],outblock2dsimperm[[i]],out
 numberofconseved <- vector()
 for (i in 1:100)
 numberofconseved[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",])[1]
-
+numberofconseved
 numberofsinglemarker <- vector()
 for (i in 1:100)
 numberofsinglemarker[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="singlemarker",])[1]
-
+numberofsinglemarker
 numberoffisfus <- vector()
 for (i in 1:100)
 numberoffisfus[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="fisfus",])[1]
-
+numberoffisfus
 sumconserved <- vector()
 for (i in 1:100)
 sumconserved[i] <- sum(as.numeric(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",3]) - as.numeric(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",2]))
-
+sumconserved
 meanconserved <- vector()
 for (i in 1:100)
 meanconserved[i] <- mean(as.numeric(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",3]) - as.numeric(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",2]))
+meanconserved
 
 #Datos reales
 outblockd <- rbind(outblock1d,outblock2d,outblock3d,outblock4d,outblock5d,outblock6d,outblock7d,outblock8d,outblock9d,outblock10d,outblock11d,outblock12d,outblock13d,outblock14d,outblock15d,outblock16d,outblock17d,outblock18d,outblock19d,outblock20d,outblock21d,outblock22d,outblock23d,outblock24d,outblock25d,outblock26d,outblock27d,outblock28d,outblock29d)
 
-dim(outblockd[outblockd[,4]=="conserved",])
-dim(outblockd[outblockd[,4]=="singlemarker",])
-dim(outblockd[outblockd[,4]=="fisfus",])
+dim(outblockd[outblockd[,4]=="conserved",])[1]
+dim(outblockd[outblockd[,4]=="singlemarker",])[1]
+dim(outblockd[outblockd[,4]=="fisfus",])[1]
 sum(as.numeric(outblockd[outblockd[,4]=="conserved",3]) - as.numeric(outblockd[outblockd[,4]=="conserved",2]))
 mean(as.numeric(outblockd[outblockd[,4]=="conserved",3]) - as.numeric(outblockd[outblockd[,4]=="conserved",2]))
 
 #make some histograms!!!!
+hist(numberoffisfus)
+abline(v=dim(outblockd[outblockd[,4]=="fisfus",]))
+sort(numberoffisfus)
 
 ```
 

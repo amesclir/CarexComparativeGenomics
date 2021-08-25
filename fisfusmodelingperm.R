@@ -4,9 +4,11 @@ fisfusmodellingperm <- function(genome, rearrangements, pfis, perm) {
   
   genomes <- list()
   genomes[[1]] <- genome
-  genome <- genomes[[1]]
+  
   
   for (i in 1:perm) {
+    
+    genome <- genomes[[1]]
     
     for (l in 1:rearrangements) {
       
