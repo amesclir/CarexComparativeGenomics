@@ -3693,10 +3693,10 @@ outblockdsimperm <- list()
 for (i in 1:100)
 outblockdsimperm[[i]] <- rbind(outblock1dsimperm[[i]],outblock2dsimperm[[i]],outblock3dsimperm[[i]],outblock4dsimperm[[i]],outblock5dsimperm[[i]],outblock6dsimperm[[i]],outblock7dsimperm[[i]],outblock8dsimperm[[i]],outblock9dsimperm[[i]],outblock10dsimperm[[i]],outblock11dsimperm[[i]],outblock12dsimperm[[i]],outblock13dsimperm[[i]],outblock14dsimperm[[i]],outblock15dsimperm[[i]],outblock16dsimperm[[i]],outblock17dsimperm[[i]],outblock18dsimperm[[i]],outblock19dsimperm[[i]],outblock20dsimperm[[i]],outblock21dsimperm[[i]],outblock22dsimperm[[i]],outblock23dsimperm[[i]],outblock24dsimperm[[i]],outblock25dsimperm[[i]],outblock26dsimperm[[i]],outblock27dsimperm[[i]],outblock28dsimperm[[i]],outblock29dsimperm[[i]])
 
-numberofconseved <- vector()
+numberofconserved <- vector()
 for (i in 1:100)
-numberofconseved[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",])[1]
-numberofconseved
+numberofconserved[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",])[1]
+numberofconserved
 numberofsinglemarker <- vector()
 for (i in 1:100)
 numberofsinglemarker[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="singlemarker",])[1]
@@ -3724,9 +3724,17 @@ sum(as.numeric(outblockd[outblockd[,4]=="conserved",3]) - as.numeric(outblockd[o
 mean(as.numeric(outblockd[outblockd[,4]=="conserved",3]) - as.numeric(outblockd[outblockd[,4]=="conserved",2]))
 
 #make some histograms!!!!
+hist(numberofconserved)
+abline(v=dim(outblockd[outblockd[,4]=="conserved",])[1])
+hist(numberofsinglemarker)
+abline(v=dim(outblockd[outblockd[,4]=="singlemarker",])[1])
 hist(numberoffisfus)
-abline(v=dim(outblockd[outblockd[,4]=="fisfus",]))
-sort(numberoffisfus)
+abline(v=dim(outblockd[outblockd[,4]=="fisfus",])[1])
+hist(sumconserved)
+abline(v=sum(as.numeric(outblockd[outblockd[,4]=="conserved",3]) - as.numeric(outblockd[outblockd[,4]=="conserved",2])))
+hist(meanconserved)
+abline(v=mean(as.numeric(outblockd[outblockd[,4]=="conserved",3]) - as.numeric(outblockd[outblockd[,4]=="conserved",2])))
+sort(meanconserved)
 
 ```
 
