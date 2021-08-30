@@ -3466,19 +3466,24 @@ Now with permutations
 ```{r}
 source("fisfusmodelingperm.R")
 # Carex scoparia and Carex littledalei got separated ca. 23 mya 
-# rate of fission based on ChromoSSE 3.4 fissions per million year and 5 fussion per million year in anagenetic
-# rate of fission based on ChromoSSE 0.6 fissions per million year and 0.4 fussion per million year in anagenetic
-# number of rearrangements are ca. 9.5 events per million year x 46 my (23 + 23 million years)
-# pfis = 4/9.4
+#Cladogenetic
+#Fission: mean = 0.567, 95% CI = 0.232 - 0.892
+#Fusion: mean = 0.475, 95% CI = 0.17 - 0.81
+#
+#Anagenetic
+#Fission: mean = 6.381, 95% CI = 5.144 - 7.597
+#Fusion: mean = 6.66, 95% CI = 5.627 - 7.75
+# number of rearrangements are ca. 14 events per million year x 46 my (23 + 23 million years)
+# pfis = 6.948/14.083
 
-rearrangements = 435
+rearrangements = 644
 pfis = 0.5
 perm = 100
 #make sure the genome object is right
 
 littledaleimodelperm <- fisfusmodellingperm(genome, rearrangements,pfis,perm)
 #littledaleimodelperm <- littledaleimodelpermcopy
-#littledaleimodelperm <- littledaleimodelpermcopy
+#littledaleimodelpermcopy <- littledaleimodelperm
 
 littledaleimodelperm[[1]]
 
