@@ -3153,6 +3153,11 @@ abline(v=dim(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="fisfus",])[1])
 
 sort(numberoffisfus)
 
+sort(as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="conserved",][,3]) - as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="conserved",][,2]))
+mean(as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="conserved",][,3]) - as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="conserved",][,2]))
+sd(as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="conserved",][,3]) - as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="conserved",][,2]))
+
+hist(as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="conserved",][,3]) - as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4]=="conserved",][,2]))
 
 ```
 
