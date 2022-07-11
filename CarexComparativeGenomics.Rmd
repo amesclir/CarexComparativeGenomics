@@ -2225,13 +2225,10 @@ sd(as.numeric(genomeblocksBCR3_alld[,5][genomeblocksBCR3_alld[,4] == "singlemark
 genomeblocksBCR3_alld
 genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4] != "singlemarker", ]
 
-boxplot(as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4] != "singlemarker", 5]) ~ genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4] != "singlemarker", 4])
-
-anova(lm(as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4] != "singlemarker", 5]) ~ genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4] != "singlemarker", 4]))
-summary(aov(as.numeric(genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4] != "singlemarker", 5]) ~ genomeblocksBCR3_alld[genomeblocksBCR3_alld[,4] != "singlemarker", 4]))
 
 
 ```
+
 
 Now we will see the patterns with CG content
 
@@ -2361,23 +2358,6 @@ genomeblocksBCR3_29dGC <- genomeblocksGC(genomeblocksBCR3_29d,chr29GC)
 genomeblocksBCR3_29dGC
 
 
-genomeblocksBCR3_alldGC <- rbind(genomeblocksBCR3_1dGC,genomeblocksBCR3_2dGC,genomeblocksBCR3_3dGC,genomeblocksBCR3_4dGC,genomeblocksBCR3_5dGC,genomeblocksBCR3_6dGC,genomeblocksBCR3_7dGC,genomeblocksBCR3_8dGC,genomeblocksBCR3_9dGC,genomeblocksBCR3_10dGC,genomeblocksBCR3_11dGC,genomeblocksBCR3_12dGC,genomeblocksBCR3_13dGC,genomeblocksBCR3_14dGC,genomeblocksBCR3_15dGC,genomeblocksBCR3_16dGC,genomeblocksBCR3_17dGC,genomeblocksBCR3_18dGC,genomeblocksBCR3_19dGC,genomeblocksBCR3_20dGC,genomeblocksBCR3_21dGC,genomeblocksBCR3_22dGC,genomeblocksBCR3_23dGC,genomeblocksBCR3_24dGC,genomeblocksBCR3_25dGC,genomeblocksBCR3_26dGC,genomeblocksBCR3_27dGC,genomeblocksBCR3_28dGC,genomeblocksBCR3_29dGC)
-
-mean(as.numeric(genomeblocksBCR3_alldGC[,6][genomeblocksBCR3_alldGC[,4] == "conserved"]))
-mean(as.numeric(genomeblocksBCR3_alldGC[,6][genomeblocksBCR3_alldGC[,4] == "fisfus"]))
-mean(as.numeric(genomeblocksBCR3_alldGC[,6][genomeblocksBCR3_alldGC[,4] == "singlemarker"]))
-
-sd(as.numeric(genomeblocksBCR3_alldGC[,6][genomeblocksBCR3_alldGC[,4] == "conserved"]))
-sd(as.numeric(genomeblocksBCR3_alldGC[,6][genomeblocksBCR3_alldGC[,4] == "fisfus"]))
-sd(as.numeric(genomeblocksBCR3_alldGC[,6][genomeblocksBCR3_alldGC[,4] == "singlemarker"]))
-
-genomeblocksBCR3_alldGC
-genomeblocksBCR3_alldGC[genomeblocksBCR3_alld[,4] != "singlemarker", ]
-
-boxplot(as.numeric(genomeblocksBCR3_alldGC[genomeblocksBCR3_alldGC[,4] != "singlemarker", 6]) ~ genomeblocksBCR3_alldGC[genomeblocksBCR3_alldGC[,4] != "singlemarker", 4])
-
-anova(lm(as.numeric(genomeblocksBCR3_alldGC[genomeblocksBCR3_alldGC[,4] != "singlemarker", 6]) ~ genomeblocksBCR3_alldGC[genomeblocksBCR3_alldGC[,4] != "singlemarker", 4]))
-summary(aov(as.numeric(genomeblocksBCR3_alldGC[genomeblocksBCR3_alldGC[,4] != "singlemarker", 6]) ~ genomeblocksBCR3_alldGC[genomeblocksBCR3_alldGC[,4] != "singlemarker", 4]))
 
 
 ```
@@ -2512,26 +2492,44 @@ genomeblocksGenes28d
 genomeblocksGenes29d <- genomeblocksGenes(genomeblocksBCR3_29dGC, Genes29)
 genomeblocksGenes29d
 
-genomeblocksGenesalld <- rbind(genomeblocksGenes1d,genomeblocksGenes2d,genomeblocksGenes3d,genomeblocksGenes4d,genomeblocksGenes5d,genomeblocksGenes6d,genomeblocksGenes7d,genomeblocksGenes8d,genomeblocksGenes9d,genomeblocksGenes10d,genomeblocksGenes11d,genomeblocksGenes12d,genomeblocksGenes13d,genomeblocksGenes14d,genomeblocksGenes15d,genomeblocksGenes16d,genomeblocksGenes17d,genomeblocksGenes18d,genomeblocksGenes19d,genomeblocksGenes20d,genomeblocksGenes21d,genomeblocksGenes22d,genomeblocksGenes23d,genomeblocksGenes24d,genomeblocksGenes25d,genomeblocksGenes26d,genomeblocksGenes27d,genomeblocksGenes28d,genomeblocksGenes29d)
+genomeblocksGenesalld <- rbind(cbind(1,genomeblocksGenes1d),cbind(2,genomeblocksGenes2d),cbind(3,genomeblocksGenes3d),cbind(4,genomeblocksGenes4d),cbind(5,genomeblocksGenes5d),cbind(6,genomeblocksGenes6d),cbind(7,genomeblocksGenes7d),cbind(8,genomeblocksGenes8d),cbind(9,genomeblocksGenes9d),cbind(10,genomeblocksGenes10d),cbind(11,genomeblocksGenes11d),cbind(12,genomeblocksGenes12d),cbind(13,genomeblocksGenes13d),cbind(14,genomeblocksGenes14d),cbind(15,genomeblocksGenes15d),cbind(16,genomeblocksGenes16d),cbind(17,genomeblocksGenes17d),cbind(18,genomeblocksGenes18d),cbind(9,genomeblocksGenes19d),cbind(20,genomeblocksGenes20d),cbind(21,genomeblocksGenes21d),cbind(22,genomeblocksGenes22d),cbind(23,genomeblocksGenes23d),cbind(24,genomeblocksGenes24d),cbind(25,genomeblocksGenes25d),cbind(26,genomeblocksGenes26d),cbind(27,genomeblocksGenes27d),cbind(28,genomeblocksGenes28d),cbind(29,genomeblocksGenes29d))
 
 genomeblocksGenesalld
-
-
-mean(as.numeric(genomeblocksGenesalld[,7][genomeblocksGenesalld[,4] == "conserved"]))
-mean(as.numeric(genomeblocksGenesalld[,7][genomeblocksGenesalld[,4] == "fisfus"]))
-mean(as.numeric(genomeblocksGenesalld[,7][genomeblocksGenesalld[,4] == "singlemarker"]))
-
-sd(as.numeric(genomeblocksGenesalld[,7][genomeblocksGenesalld[,4] == "conserved"]))
-sd(as.numeric(genomeblocksGenesalld[,7][genomeblocksGenesalld[,4] == "fisfus"]))
-sd(as.numeric(genomeblocksGenesalld[,7][genomeblocksGenesalld[,4] == "singlemarker"]))
-
 genomeblocksGenesalld
-genomeblocksGenesalld[genomeblocksBCR3_alld[,4] != "singlemarker", ]
+genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", ]
 
-boxplot(as.numeric(genomeblocksGenesalld[genomeblocksGenesalld[,4] != "singlemarker", 7]) ~ genomeblocksGenesalld[genomeblocksGenesalld[,4] != "singlemarker", 4])
+glm_genomeblocks_alld <- genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", -c(2:4)]
+glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="conserved"] <- 0
+glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="fisfus"] <- 1
 
-anova(lm(as.numeric(genomeblocksGenesalld[genomeblocksGenesalld[,4] != "singlemarker", 7]) ~ genomeblocksGenesalld[genomeblocksGenesalld[,4] != "singlemarker", 4]))
-summary(aov(as.numeric(genomeblocksGenesalld[genomeblocksGenesalld[,4] != "singlemarker", 7]) ~ genomeblocksGenesalld[genomeblocksGenesalld[,4] != "singlemarker", 4]))
+library(lme4)
+glm_genomeblocks_alld<- data.frame (glm_genomeblocks_alld)
+colnames(glm_genomeblocks_alld) <- c("chromosome", "type", "BCR",  "GC", "Genes")
+fittedModel <- glmer (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + (1|chromosome), data = glm_genomeblocks_alld, family = binomial(link = "logit"))
+summary(fittedModel)
+
+fittedModel2 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes), family = binomial(link = "logit"), data = glm_genomeblocks_alld)
+summary(fittedModel2)
+
+fittedModel3 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes), family = gaussian(link = "identity"), data = glm_genomeblocks_alld)
+summary(fittedModel3)
+
+fittedModel4 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes), family = poisson(link = "log"), data = glm_genomeblocks_alld)
+summary(fittedModel4)
+
+library(DHARMa)
+
+simulationOutput <- simulateResiduals(fittedModel = fittedModel, plot = F)
+plot(simulationOutput)
+
+simulationOutput2 <- simulateResiduals(fittedModel = fittedModel2, plot = F)
+plot(simulationOutput2)
+
+simulationOutput3 <- simulateResiduals(fittedModel = fittedModel3, plot = F)
+plot(simulationOutput3)
+
+simulationOutput4 <- simulateResiduals(fittedModel = fittedModel4, plot = F)
+plot(simulationOutput4)
 
 ```
 
