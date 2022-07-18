@@ -2897,244 +2897,248 @@ source("fisfusmodelingperm.R")
 
 rearrangements = 644
 pfis = 0.5
-perm = 100
+perm = 99
 #make sure the genome object is right
+source("genome.R")
 
 littledaleimodelperm <- fisfusmodellingperm(genome, rearrangements,pfis,perm)
 #littledaleimodelperm <- littledaleimodelpermcopy
 #littledaleimodelpermcopy <- littledaleimodelperm
 
 littledaleimodelperm[[1]]
+littledaleimodelperm[[1000]]
 
-for (i in 1:100) { 
+for (i in 1:perm) { 
 for (j in 1:length(unique(littledaleimodelperm[[i+1]][,1])))  
 littledaleimodelperm[[i+1]][littledaleimodelperm[[i+1]][,1] == unique(littledaleimodelperm[[i+1]][,1])[j],1] <- paste("LG",j, sep="")
 }
 
+littledaleimodelperm[[2]]
 
-
+#IMPORTANT, MAKE SURE YOU RESTORE THE ORIGINAL GENOME!
+source("genome.R")
 genome <- genome[complete.cases(genome),]
 
-for (i in 1:101)
+for (i in 1:(perm + 1))
 littledaleimodelperm[[i]] <- littledaleimodelperm[[i]][complete.cases(littledaleimodelperm[[i]]),]
 littledaleimodelperm[[2]]
 
 linkssimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 linkssimperm[[i]] <- merge(genome, littledaleimodelperm[[i+1]], by = "Marker", sort = F, no.dups = TRUE)
-linkssimperm[[2]]
+linkssimperm[[67]]
 
 length(genome[,4])
 length(unique(genome[,4]))
 dim(linkssimperm[[2]])
 
-for (i in 1:100)
+for (i in 1:perm)
 linkssimperm[[i]] <- linkssimperm[[i]][,c(2,3,4,5,6,7)]
 
 linkssimperm[[2]]
 
 chr1dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr1dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr1",]
 chr1dsimperm[[2]]
 
 chr2dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr2dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr2",]
 chr3dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr3dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr3",]
 chr4dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr4dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr4",]
 chr5dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr5dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr5",]
 chr6dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr6dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr6",]
 chr7dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr7dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr7",]
 chr8dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr8dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr8",]
 chr9dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr9dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr9",]
 chr10dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr10dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr10",]
 chr11dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr11dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr11",]
 chr12dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr12dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr12",]
 chr13dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr13dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr13",]
 chr14dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr14dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr14",]
 chr15dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr15dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr15",]
 chr16dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr16dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr16",]
 chr17dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr17dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr17",]
 chr18dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr18dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr18",]
 chr19dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr19dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr19",]
 chr20dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr20dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr20",]
 chr21dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr21dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr21",]
 chr22dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr22dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr22",]
 chr23dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr23dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr23",]
 chr24dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr24dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr24",]
 chr25dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr25dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr25",]
 chr26dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr26dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr26",]
 chr27dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr27dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr27",]
 chr28dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr28dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr28",]
 chr29dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 chr29dsimperm[[i]] <- linkssimperm[[i]][linkssimperm[[i]][,1]=="chr29",]
 
 source("genomeblocks.R")
 outblock1dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock1dsimperm[[i]] <- genomeblocks(chr1dsimperm[[i]])
 outblock2dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock2dsimperm[[i]] <- genomeblocks(chr2dsimperm[[i]])
 outblock3dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock3dsimperm[[i]] <- genomeblocks(chr3dsimperm[[i]])
 outblock4dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock4dsimperm[[i]] <- genomeblocks(chr4dsimperm[[i]])
 outblock5dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock5dsimperm[[i]] <- genomeblocks(chr5dsimperm[[i]])
 outblock6dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock6dsimperm[[i]] <- genomeblocks(chr6dsimperm[[i]])
 outblock7dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock7dsimperm[[i]] <- genomeblocks(chr7dsimperm[[i]])
 outblock8dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock8dsimperm[[i]] <- genomeblocks(chr8dsimperm[[i]])
 outblock9dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock9dsimperm[[i]] <- genomeblocks(chr9dsimperm[[i]])
 outblock10dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock10dsimperm[[i]] <- genomeblocks(chr10dsimperm[[i]])
 outblock11dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock11dsimperm[[i]] <- genomeblocks(chr11dsimperm[[i]])
 outblock12dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock12dsimperm[[i]] <- genomeblocks(chr12dsimperm[[i]])
 outblock13dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock13dsimperm[[i]] <- genomeblocks(chr13dsimperm[[i]])
 outblock14dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock14dsimperm[[i]] <- genomeblocks(chr14dsimperm[[i]])
 outblock15dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock15dsimperm[[i]] <- genomeblocks(chr15dsimperm[[i]])
 outblock16dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock16dsimperm[[i]] <- genomeblocks(chr16dsimperm[[i]])
 outblock17dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock17dsimperm[[i]] <- genomeblocks(chr17dsimperm[[i]])
 outblock18dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock18dsimperm[[i]] <- genomeblocks(chr18dsimperm[[i]])
 outblock19dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock19dsimperm[[i]] <- genomeblocks(chr19dsimperm[[i]])
 outblock20dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock20dsimperm[[i]] <- genomeblocks(chr20dsimperm[[i]])
 outblock21dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock21dsimperm[[i]] <- genomeblocks(chr21dsimperm[[i]])
 outblock22dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock22dsimperm[[i]] <- genomeblocks(chr22dsimperm[[i]])
 outblock23dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock23dsimperm[[i]] <- genomeblocks(chr23dsimperm[[i]])
 outblock24dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock24dsimperm[[i]] <- genomeblocks(chr24dsimperm[[i]])
 outblock25dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock25dsimperm[[i]] <- genomeblocks(chr25dsimperm[[i]])
 outblock26dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock26dsimperm[[i]] <- genomeblocks(chr26dsimperm[[i]])
 outblock27dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock27dsimperm[[i]] <- genomeblocks(chr27dsimperm[[i]])
 outblock28dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock28dsimperm[[i]] <- genomeblocks(chr28dsimperm[[i]])
 outblock29dsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblock29dsimperm[[i]] <- genomeblocks(chr29dsimperm[[i]])
 
 
 outblockdsimperm <- list()
-for (i in 1:100)
+for (i in 1:perm)
 outblockdsimperm[[i]] <- rbind(outblock1dsimperm[[i]],outblock2dsimperm[[i]],outblock3dsimperm[[i]],outblock4dsimperm[[i]],outblock5dsimperm[[i]],outblock6dsimperm[[i]],outblock7dsimperm[[i]],outblock8dsimperm[[i]],outblock9dsimperm[[i]],outblock10dsimperm[[i]],outblock11dsimperm[[i]],outblock12dsimperm[[i]],outblock13dsimperm[[i]],outblock14dsimperm[[i]],outblock15dsimperm[[i]],outblock16dsimperm[[i]],outblock17dsimperm[[i]],outblock18dsimperm[[i]],outblock19dsimperm[[i]],outblock20dsimperm[[i]],outblock21dsimperm[[i]],outblock22dsimperm[[i]],outblock23dsimperm[[i]],outblock24dsimperm[[i]],outblock25dsimperm[[i]],outblock26dsimperm[[i]],outblock27dsimperm[[i]],outblock28dsimperm[[i]],outblock29dsimperm[[i]])
 
 numberofconserved <- vector()
-for (i in 1:100)
+for (i in 1:perm)
 numberofconserved[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",])[1]
 numberofconserved
 numberofsinglemarker <- vector()
-for (i in 1:100)
+for (i in 1:perm)
 numberofsinglemarker[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="singlemarker",])[1]
 numberofsinglemarker
 numberoffisfus <- vector()
-for (i in 1:100)
+for (i in 1:perm)
 numberoffisfus[i] <- dim(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="fisfus",])[1]
 numberoffisfus
 sumconserved <- vector()
-for (i in 1:100)
+for (i in 1:perm)
 sumconserved[i] <- sum(as.numeric(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",3]) - as.numeric(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",2]))
 sumconserved
 meanconserved <- vector()
-for (i in 1:100)
+for (i in 1:perm)
 meanconserved[i] <- mean(as.numeric(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",3]) - as.numeric(outblockdsimperm[[i]][outblockdsimperm[[i]][,4]=="conserved",2]))
 meanconserved
 
