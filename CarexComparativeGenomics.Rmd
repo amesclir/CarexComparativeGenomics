@@ -3762,41 +3762,7 @@ dim(genomeblocksgypsy_alld[genomeblocksgypsy_alld[,4] != "singlemarker", ])
 dim(genomeblocksGenesalld)
 dim(genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", ])
 
-glm_genomeblocks_alld <- genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", -c(2:4)]
 
-glm_genomeblocks_alld <- cbind(glm_genomeblocks_alld,genomeblocksTE_alld[genomeblocksTE_alld[,4] != "singlemarker", 5],genomeblocksgypsy_alld[genomeblocksgypsy_alld[,4] != "singlemarker", 5])
-
-glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="conserved"] <- 0
-glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="fisfus"] <- 1
-
-library(lme4)
-glm_genomeblocks_alld<- data.frame (glm_genomeblocks_alld)
-colnames(glm_genomeblocks_alld) <- c("chromosome", "type", "BCR",  "GC", "Genes", "TE", "gypsy")
-fittedModel <- glmer (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE) + as.numeric(gypsy) + (1|chromosome), data = glm_genomeblocks_alld, family = binomial(link = "logit"))
-summary(fittedModel)
-
-fittedModel2 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE) + as.numeric(gypsy), family = binomial(link = "logit"), data = glm_genomeblocks_alld)
-summary(fittedModel2)
-
-fittedModel3 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE)+ as.numeric(gypsy), family = gaussian(link = "identity"), data = glm_genomeblocks_alld)
-summary(fittedModel3)
-
-fittedModel4 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes)+ as.numeric(TE) + as.numeric(gypsy), family = poisson(link = "log"), data = glm_genomeblocks_alld)
-summary(fittedModel4)
-
-library(DHARMa)
-
-simulationOutput <- simulateResiduals(fittedModel = fittedModel, plot = F)
-plot(simulationOutput)
-
-simulationOutput2 <- simulateResiduals(fittedModel = fittedModel2, plot = F)
-plot(simulationOutput2)
-
-simulationOutput3 <- simulateResiduals(fittedModel = fittedModel3, plot = F)
-plot(simulationOutput3)
-
-simulationOutput4 <- simulateResiduals(fittedModel = fittedModel4, plot = F)
-plot(simulationOutput4)
 ```
 
 
@@ -3975,41 +3941,7 @@ dim(genomeblocksclass_II_alld[genomeblocksclass_II_alld[,4] != "singlemarker", ]
 dim(genomeblocksGenesalld)
 dim(genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", ])
 
-glm_genomeblocks_alld <- genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", -c(2:4)]
 
-glm_genomeblocks_alld <- cbind(glm_genomeblocks_alld,genomeblocksTE_alld[genomeblocksTE_alld[,4] != "singlemarker", 5],genomeblocksclass_II_alld[genomeblocksclass_II_alld[,4] != "singlemarker", 5])
-
-glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="conserved"] <- 0
-glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="fisfus"] <- 1
-
-library(lme4)
-glm_genomeblocks_alld<- data.frame (glm_genomeblocks_alld)
-colnames(glm_genomeblocks_alld) <- c("chromosome", "type", "BCR",  "GC", "Genes", "TE", "class_II")
-fittedModel <- glmer (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE) + as.numeric(class_II) + (1|chromosome), data = glm_genomeblocks_alld, family = binomial(link = "logit"))
-summary(fittedModel)
-
-fittedModel2 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE) + as.numeric(class_II), family = binomial(link = "logit"), data = glm_genomeblocks_alld)
-summary(fittedModel2)
-
-fittedModel3 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE)+ as.numeric(class_II), family = gaussian(link = "identity"), data = glm_genomeblocks_alld)
-summary(fittedModel3)
-
-fittedModel4 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes)+ as.numeric(TE) + as.numeric(class_II), family = poisson(link = "log"), data = glm_genomeblocks_alld)
-summary(fittedModel4)
-
-library(DHARMa)
-
-simulationOutput <- simulateResiduals(fittedModel = fittedModel, plot = F)
-plot(simulationOutput)
-
-simulationOutput2 <- simulateResiduals(fittedModel = fittedModel2, plot = F)
-plot(simulationOutput2)
-
-simulationOutput3 <- simulateResiduals(fittedModel = fittedModel3, plot = F)
-plot(simulationOutput3)
-
-simulationOutput4 <- simulateResiduals(fittedModel = fittedModel4, plot = F)
-plot(simulationOutput4)
 ```
 
 
@@ -4188,41 +4120,7 @@ dim(genomeblockscopia_alld[genomeblockscopia_alld[,4] != "singlemarker", ])
 dim(genomeblocksGenesalld)
 dim(genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", ])
 
-glm_genomeblocks_alld <- genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", -c(2:4)]
 
-glm_genomeblocks_alld <- cbind(glm_genomeblocks_alld,genomeblocksTE_alld[genomeblocksTE_alld[,4] != "singlemarker", 5],genomeblockscopia_alld[genomeblockscopia_alld[,4] != "singlemarker", 5])
-
-glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="conserved"] <- 0
-glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="fisfus"] <- 1
-
-library(lme4)
-glm_genomeblocks_alld<- data.frame (glm_genomeblocks_alld)
-colnames(glm_genomeblocks_alld) <- c("chromosome", "type", "BCR",  "GC", "Genes", "TE", "copia")
-fittedModel <- glmer (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE) + as.numeric(copia) + (1|chromosome), data = glm_genomeblocks_alld, family = binomial(link = "logit"))
-summary(fittedModel)
-
-fittedModel2 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE) + as.numeric(copia), family = binomial(link = "logit"), data = glm_genomeblocks_alld)
-summary(fittedModel2)
-
-fittedModel3 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE)+ as.numeric(copia), family = gaussian(link = "identity"), data = glm_genomeblocks_alld)
-summary(fittedModel3)
-
-fittedModel4 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes)+ as.numeric(TE) + as.numeric(copia), family = poisson(link = "log"), data = glm_genomeblocks_alld)
-summary(fittedModel4)
-
-library(DHARMa)
-
-simulationOutput <- simulateResiduals(fittedModel = fittedModel, plot = F)
-plot(simulationOutput)
-
-simulationOutput2 <- simulateResiduals(fittedModel = fittedModel2, plot = F)
-plot(simulationOutput2)
-
-simulationOutput3 <- simulateResiduals(fittedModel = fittedModel3, plot = F)
-plot(simulationOutput3)
-
-simulationOutput4 <- simulateResiduals(fittedModel = fittedModel4, plot = F)
-plot(simulationOutput4)
 ```
 
 
@@ -4403,24 +4301,34 @@ dim(genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", ])
 
 glm_genomeblocks_alld <- genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", -c(2:4)]
 
-glm_genomeblocks_alld <- cbind(glm_genomeblocks_alld,genomeblocksTE_alld[genomeblocksTE_alld[,4] != "singlemarker", 5],genomeblocksnon_LTR_alld[genomeblocksnon_LTR_alld[,4] != "singlemarker", 5])
+
+```
+
+
+TEs separately
+
+```{r}
+
+glm_genomeblocks_alld <- genomeblocksGenesalld[genomeblocksGenesalld[,5] != "singlemarker", -c(2:4)]
+
+glm_genomeblocks_alld <- cbind(glm_genomeblocks_alld,genomeblockssatDNA_alld[genomeblockssatDNA_alld[,4] != "singlemarker", 5],genomeblocksclass_II_alld[genomeblocksclass_II_alld[,4] != "singlemarker", 5], genomeblockscopia_alld[genomeblockscopia_alld[,4] != "singlemarker", 5], genomeblocksgypsy_alld[genomeblocksgypsy_alld[,4] != "singlemarker", 5], genomeblocksnon_LTR_alld[genomeblocksnon_LTR_alld[,4] != "singlemarker", 5])
 
 glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="conserved"] <- 0
 glm_genomeblocks_alld[,2][glm_genomeblocks_alld[,2]=="fisfus"] <- 1
 
 library(lme4)
 glm_genomeblocks_alld<- data.frame (glm_genomeblocks_alld)
-colnames(glm_genomeblocks_alld) <- c("chromosome", "type", "BCR",  "GC", "Genes", "TE", "non_LTR")
-fittedModel <- glmer (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE) + as.numeric(non_LTR) + (1|chromosome), data = glm_genomeblocks_alld, family = binomial(link = "logit"))
+colnames(glm_genomeblocks_alld) <- c("chromosome", "type", "BCR",  "GC", "Genes", "satDNA", "class_II", "copia", "gypsy", "non_LTR")
+fittedModel <- glmer (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(satDNA)+ as.numeric(class_II)+ as.numeric(copia) + as.numeric(gypsy) + as.numeric(non_LTR) + (1|chromosome), data = glm_genomeblocks_alld, family = binomial(link = "logit"))
 summary(fittedModel)
 
-fittedModel2 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE) + as.numeric(non_LTR), family = binomial(link = "logit"), data = glm_genomeblocks_alld)
+fittedModel2 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(satDNA)+ as.numeric(class_II)+ as.numeric(copia) + as.numeric(gypsy) + as.numeric(non_LTR), family = binomial(link = "logit"), data = glm_genomeblocks_alld)
 summary(fittedModel2)
 
-fittedModel3 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(TE)+ as.numeric(non_LTR), family = gaussian(link = "identity"), data = glm_genomeblocks_alld)
+fittedModel3 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(satDNA)+ as.numeric(class_II)+ as.numeric(copia) + as.numeric(gypsy) + as.numeric(non_LTR), family = gaussian(link = "identity"), data = glm_genomeblocks_alld)
 summary(fittedModel3)
 
-fittedModel4 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes)+ as.numeric(TE) + as.numeric(non_LTR), family = poisson(link = "log"), data = glm_genomeblocks_alld)
+fittedModel4 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(satDNA)+ as.numeric(class_II)+ as.numeric(copia) + as.numeric(gypsy) + as.numeric(non_LTR), family = poisson(link = "log"), data = glm_genomeblocks_alld)
 summary(fittedModel4)
 
 library(DHARMa)
@@ -4437,3 +4345,4 @@ plot(simulationOutput3)
 simulationOutput4 <- simulateResiduals(fittedModel = fittedModel4, plot = F)
 plot(simulationOutput4)
 ```
+
