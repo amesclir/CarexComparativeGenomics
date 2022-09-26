@@ -4383,7 +4383,7 @@ colnames(glm_genomeblocks_alld) <- c("chromosome", "type", "BCR",  "GC", "Genes"
 fittedModel <- glmer (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(satDNA)+ as.numeric(class_II)+ as.numeric(copia) + as.numeric(gypsy) + as.numeric(non_LTR) + (1|chromosome), data = glm_genomeblocks_alld, family = binomial(link = "logit"))
 summary(fittedModel)
 
-fittedModel2 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(satDNA)+ as.numeric(class_II)+ as.numeric(copia) + as.numeric(gypsy) + as.numeric(non_LTR), family = binomial(link = "logit"), data = glm_genomeblocks_alld)
+fittedModel2 <- glm (as.numeric(type) ~ as.numeric(Genes) + as.numeric(satDNA)+ as.numeric(class_II)+ as.numeric(copia) + as.numeric(gypsy) + as.numeric(non_LTR), family = binomial(link = "logit"), data = glm_genomeblocks_alld)
 summary(fittedModel2)
 
 fittedModel3 <- glm (as.numeric(type) ~ as.numeric(BCR) + as.numeric(GC) + as.numeric(Genes) + as.numeric(satDNA)+ as.numeric(class_II)+ as.numeric(copia) + as.numeric(gypsy) + as.numeric(non_LTR), family = gaussian(link = "identity"), data = glm_genomeblocks_alld)
