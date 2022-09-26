@@ -2429,8 +2429,41 @@ Now we are going to check whats going on with genes
 
 #Using the genome with duplicates
 
-Genes <- read.csv("genes.csv")
-#Somewhat similar sequences (blastn), default
+Genes <- read.csv("Kobresia_littledalei_genes.bed", sep = "\t")
+Genes 
+
+Genes <- Genes[,1:3]
+Genes[Genes[,1]=="CM022079",1] <- "chr1"
+Genes[Genes[,1]=="CM022080",1] <- "chr2"
+Genes[Genes[,1]=="CM022081",1] <- "chr3"
+Genes[Genes[,1]=="CM022082",1] <- "chr4"
+Genes[Genes[,1]=="CM022083",1] <- "chr5"
+Genes[Genes[,1]=="CM022084",1] <- "chr6"
+Genes[Genes[,1]=="CM022085",1] <- "chr7"
+Genes[Genes[,1]=="CM022086",1] <- "chr8"
+Genes[Genes[,1]=="CM022087",1] <- "chr9"
+Genes[Genes[,1]=="CM022088",1] <- "chr10"
+Genes[Genes[,1]=="CM022089",1] <- "chr11"
+Genes[Genes[,1]=="CM022090",1] <- "chr12"
+Genes[Genes[,1]=="CM022091",1] <- "chr13"
+Genes[Genes[,1]=="CM022092",1] <- "chr14"
+Genes[Genes[,1]=="CM022093",1] <- "chr15"
+Genes[Genes[,1]=="CM022094",1] <- "chr16"
+Genes[Genes[,1]=="CM022095",1] <- "chr17"
+Genes[Genes[,1]=="CM022096",1] <- "chr18"
+Genes[Genes[,1]=="CM022097",1] <- "chr19"
+Genes[Genes[,1]=="CM022098",1] <- "chr20"
+Genes[Genes[,1]=="CM022099",1] <- "chr21"
+Genes[Genes[,1]=="CM022100",1] <- "chr22"
+Genes[Genes[,1]=="CM022101",1] <- "chr23"
+Genes[Genes[,1]=="CM022102",1] <- "chr24"
+Genes[Genes[,1]=="CM022103",1] <- "chr25"
+Genes[Genes[,1]=="CM022104",1] <- "chr26"
+Genes[Genes[,1]=="CM022105",1] <- "chr27"
+Genes[Genes[,1]=="CM022106",1] <- "chr28"
+Genes[Genes[,1]=="CM022107",1] <- "chr29"
+colnames(Genes) <- c("Chromosome", "Start", "End")
+
 
 Genes1 <- Genes[Genes$Chromosome=="chr1",]
 Genes1
@@ -2554,6 +2587,19 @@ genomeblocksGenes29d <- genomeblocksGenes(genomeblocksBCR3_29dGC, Genes29)
 genomeblocksGenes29d
 
 genomeblocksGenesalld <- rbind(cbind(1,genomeblocksGenes1d),cbind(2,genomeblocksGenes2d),cbind(3,genomeblocksGenes3d),cbind(4,genomeblocksGenes4d),cbind(5,genomeblocksGenes5d),cbind(6,genomeblocksGenes6d),cbind(7,genomeblocksGenes7d),cbind(8,genomeblocksGenes8d),cbind(9,genomeblocksGenes9d),cbind(10,genomeblocksGenes10d),cbind(11,genomeblocksGenes11d),cbind(12,genomeblocksGenes12d),cbind(13,genomeblocksGenes13d),cbind(14,genomeblocksGenes14d),cbind(15,genomeblocksGenes15d),cbind(16,genomeblocksGenes16d),cbind(17,genomeblocksGenes17d),cbind(18,genomeblocksGenes18d),cbind(9,genomeblocksGenes19d),cbind(20,genomeblocksGenes20d),cbind(21,genomeblocksGenes21d),cbind(22,genomeblocksGenes22d),cbind(23,genomeblocksGenes23d),cbind(24,genomeblocksGenes24d),cbind(25,genomeblocksGenes25d),cbind(26,genomeblocksGenes26d),cbind(27,genomeblocksGenes27d),cbind(28,genomeblocksGenes28d),cbind(29,genomeblocksGenes29d))
+
+length(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "conserved"])
+length(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "fisfus"])
+length(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "singlemarker"])
+
+mean(as.numeric(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "conserved"]))
+mean(as.numeric(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "fisfus"]))
+mean(as.numeric(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "singlemarker"]))
+
+sd(as.numeric(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "conserved"]))
+sd(as.numeric(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "fisfus"]))
+sd(as.numeric(genomeblocksGenesalld[,8][genomeblocksGenesalld[,5] == "singlemarker"]))
+
 
 genomeblocksGenesalld
 genomeblocksGenesalld
